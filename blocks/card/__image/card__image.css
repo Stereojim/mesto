@@ -1,0 +1,8 @@
+.card__image {
+  background-image: url(../../../images/karachaevsk.jpg);
+  background-size: cover;
+  box-sizing: border-box;
+  border-radius: 10px 10px 0 0;
+  width: 282px;
+  height: 282px;
+}

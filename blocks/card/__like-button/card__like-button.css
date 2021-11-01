@@ -1,0 +1,12 @@
+.card__like-button {
+  background-image: url(../../../images/like-button_disabled.svg);
+  margin: 0;
+  border: none;
+  outline: none;
+  background-color: white;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 11px;
+  margin-right: 20px;
+  box-sizing: border-box;
+}

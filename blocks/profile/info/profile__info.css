@@ -1,4 +1,8 @@
 .profile__info {
-  position: absolute;
-  left: 140px;
+display: flex;
+flex-wrap: wrap;
+max-width: 336px;
+position: absolute;
+padding-left: 150px;
+height: 100%;
 }

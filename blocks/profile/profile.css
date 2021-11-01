@@ -1,5 +1,10 @@
 .profile {
     display: flex;
+    margin: auto;
     margin-top: 40px;
+    position: relative;
+    max-width: 880px;
+    align-items: center;
+    justify-content: space-between;
     position: relative;
 }

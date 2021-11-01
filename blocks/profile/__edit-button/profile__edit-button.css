@@ -1,0 +1,14 @@
+.profile__edit-button {
+  border: 1px solid white;
+  padding: 11px;
+  background-color: black;
+  outline: none;
+  background-image: url(../../../images/editpen.svg);
+  background-size: cover;
+  background-size: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-sizing: border-box;
+  height: 24px;
+  margin-top: 37px;
+}
