@@ -1,8 +1,15 @@
 .profile__info {
-display: flex;
-flex-wrap: wrap;
-max-width: 336px;
-position: absolute;
-padding-left: 150px;
-height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 336px;
+  position: absolute;
+  padding-left: 150px;
+  height: 100%;
+}
+
+@media screen and (max-width: 900px) {
+  .profile__info {
+    position: relative;
+    padding-left: 15px;
+  }
 }

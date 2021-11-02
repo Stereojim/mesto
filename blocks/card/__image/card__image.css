@@ -1,8 +1,16 @@
 .card__image {
-  background-image: url(../../../images/karachaevsk.jpg);
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
   background-size: cover;
   box-sizing: border-box;
   border-radius: 10px 10px 0 0;
-  width: 282px;
-  height: 282px;
+  max-width: 282px;
+}
+
+@media screen and (max-width: 900px) {
+  .card__image {
+
+  }
 }
