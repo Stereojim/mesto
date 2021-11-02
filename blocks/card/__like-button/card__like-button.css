@@ -12,4 +12,15 @@
   background-repeat: no-repeat;
   padding: 11px;
   box-sizing: border-box;
+  cursor: pointer;
+  transition: ease-in-out 0.2s;
+}
+
+.card__like-button:hover {
+  opacity: 0.5;
+}
+
+.card__like-button:active {
+  opacity: 1;
+  background-image: url(../../../images/liked.svg);
 }

@@ -9,6 +9,21 @@
   background-position: center;
   background-repeat: no-repeat;
   box-sizing: border-box;
-  height: 24px;
-  margin-top: 37px;
+  height: 18px;
+  margin-top: 34px;
+  cursor: pointer;
+  transition: ease-in-out 0.2s;
+  }
+
+@media screen and (max-width: 500px) {
+  .profile__edit-button {
+    padding: 8px;
+    margin-left: 10px;
+  }
+}
+
+
+
+.profile__edit-button:hover {
+opacity: 0.6;
 }

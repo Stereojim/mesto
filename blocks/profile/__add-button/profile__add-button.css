@@ -6,11 +6,20 @@
   background-image: url(../../../images/plusicon.svg);
   background-repeat: no-repeat;
   background-position: center;
-
+  border-radius: 2px;
+  transition: ease-in-out 0.2s;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 500px) {
   .profile__add-button {
+    margin-top: 8px;
     width: 282px;
+background-size: 16px;
+    box-sizing: border-box;
   }
+}
+
+.profile__add-button:hover {
+  opacity: 0.6;
 }

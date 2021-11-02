@@ -6,4 +6,16 @@
   line-height: 48px;
   font-weight: 500;
   margin-right: 18px;
+  font-style: normal;
+  letter-spacing: 0.4px;
+}
+
+@media screen and (max-width: 500px) {
+  .profile__name {
+    font-size: 27px;
+    line-height: 33px;
+    margin: 0;
+    margin-left: 15.3vw;
+    padding-top: 27px;
+  }
 }

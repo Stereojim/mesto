@@ -9,3 +9,19 @@
   line-height: 21.78px;
   font-weight: normal;
 }
+
+@media screen and (max-width: 900px) {
+  .footer {
+max-width: 90vw;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .footer {
+    margin-left: 5.9375vw;
+    margin-top: 28px;
+    margin-bottom: 36px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

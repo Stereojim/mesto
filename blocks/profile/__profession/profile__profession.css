@@ -6,3 +6,13 @@
   line-height: 21.78px;
   font-weight: 400;
 }
+
+@media screen and (max-width: 500px) {
+  .profile__profession {
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    margin-top: 7px;
+    margin-left: 20.2vw;
+  }
+}
