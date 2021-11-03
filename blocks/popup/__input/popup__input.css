@@ -10,6 +10,9 @@
   margin-left: 36px;
   font-size: 14px;
   line-height: 17px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .popup__input:active {

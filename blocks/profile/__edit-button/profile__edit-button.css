@@ -1,7 +1,7 @@
 .profile__edit-button {
   border: 1px solid white;
   padding: 11px;
-  background-color: black;
+  background-color: transparent;
   outline: none;
   background-image: url(../../../images/editpen.svg);
   background-size: cover;
@@ -21,8 +21,6 @@
     margin-left: 10px;
   }
 }
-
-
 
 .profile__edit-button:hover {
 opacity: 0.6;
