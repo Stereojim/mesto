@@ -1,6 +1,6 @@
 # 1. Project: mesto
 
-### 2. mesto - is a simple project, like an private foto library - with an author and his favorite places (fotos). At this point you can only change the name and description of autors job. Mesto looks good as fuulsized an also as mobile versions.
+### 2. mesto - is a simple project, like an private foto library - with an author and his favorite places (fotos). At this point you can only change the name and description of autors job. Mesto looks good as fulsized an also as mobile versions.
 
 * So maket was get from figma
 * Pictures - mine
