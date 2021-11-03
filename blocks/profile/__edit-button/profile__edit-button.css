@@ -13,16 +13,16 @@
   align-self: center;
   cursor: pointer;
   transition: ease-in-out 0.2s;
-  }
+}
 
 @media screen and (max-width: 500px) {
   .profile__edit-button {
     padding: 8px;
     margin-left: 8px;
-  margin-top: 21px;    
+    margin-top: 21px;
   }
 }
 
 .profile__edit-button:hover {
-opacity: 0.6;
+  opacity: 0.6;
 }

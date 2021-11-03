@@ -10,9 +10,8 @@
 @media screen and (max-width: 900px) {
   .elements {
     grid-template-columns: repeat(2, 282px);
-  max-width: 610px;
+    max-width: 610px;
   }
-
 }
 
 @media screen and (max-width: 600px) {
@@ -21,5 +20,4 @@
     justify-content: space-around;
     margin-top: 36px;
   }
-
 }

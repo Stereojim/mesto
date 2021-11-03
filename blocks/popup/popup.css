@@ -12,7 +12,6 @@
   transition: ease-in-out 0.5s;
 }
 
-.popup::before{
+.popup::before {
   scale: 0.5;
 }
-
