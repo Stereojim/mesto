@@ -22,7 +22,7 @@ document.querySelector(".popup__input_name").value = person.textContent;
 document.querySelector(".popup__input_profession").value =
   profession.textContent;
 
-let submitButton = document.querySelector(".popup__button-submit");
+let submitForm = document.querySelector(".popup");
 
 function formSubmitHandler(evt) {
   evt.preventDefault();
@@ -39,4 +39,4 @@ function formSubmitHandler(evt) {
   popup.classList.remove("popup_opened");
 }
 
-submitButton.addEventListener("click", formSubmitHandler);
+submitForm.addEventListener("submit", formSubmitHandler);

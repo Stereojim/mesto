@@ -1,6 +1,4 @@
 .profile__add-button {
-  position: absolute;
-  right: 0;
   width: 150px;
   height: 50px;
   border: 2px solid white;
@@ -11,6 +9,8 @@
   border-radius: 2px;
   transition: ease-in-out 0.2s;
   cursor: pointer;
+  right: 0;
+  align-self: center;
 }
 
 @media screen and (max-width: 900px) {
