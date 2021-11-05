@@ -12,6 +12,8 @@
   overflow: hidden;
   align-self: flex-end;
   max-width: 500px;
+  grid-column-start: 2;
+  grid-column-end: 3;
 }
 
 @media screen and (max-width: 500px) {

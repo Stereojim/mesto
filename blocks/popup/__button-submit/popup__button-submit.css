@@ -2,6 +2,7 @@
   background-color: black;
   color: white;
   border: 0;
+  border-radius: 2px;
   height: 50px;
   width: 358px;
   align-self: center;
@@ -15,4 +16,14 @@
 
 .popup__button-submit:hover {
   opacity: 0.8;
+}
+
+@media screen and (max-width: 500px) {
+  .popup__button-submit {
+    max-width: 74.375vw;
+    height: 46px;
+    margin-top: 45px;
+    font-size: 14px;
+    line-height: 17px;
+  }
 }

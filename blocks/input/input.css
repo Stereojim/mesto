@@ -1,18 +1,23 @@
-.popup__input {
+.input {
   display: flex;
   padding: 0;
   margin: 0;
   border: 0;
   border: none;
+  outline: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
   margin-top: 16px;
-  font-size: 14px;
-  line-height: 17px;
   text-align: initial;
   width: 83.255814%;
-  height: 40px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+}
+
+@media screen and (max-width: 500px) {
+  .input {
+    max-width: 74.375vw;
+    width: 100%;
+  }
 }

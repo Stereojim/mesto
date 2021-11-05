@@ -7,42 +7,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>mesto</title>
   <base target="_blank">
-  <link rel="stylesheet" href="vendor/normalize.css">
   <link rel="stylesheet" href="pages/index.css">
 </head>
 
 <body class="body">
   <div class="page">
     <header class="header">
-      <div class="header__logo">
-      </div>
+      <img class="header__logo" src="images/Logo-header.svg" alt="логотип место">
     </header>
 
     <main class="content">
       <div class="profile">
-        <img class="profile__avatar" src="images/avatar.jpg" alt="фото Жака Ив Кусто">
+        <img class="profile__avatar" src="images/avatar.jpg" alt="фото автора">
         <div class="profile__info">
-          <h1 class="profile__name">Жак-Ив Кусто</h1>
-          <button class="profile__edit-button"></button>
+          <div class="profile__rename">
+            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <button class="profile__edit-button" aria-label="изменить" type="button"></button>
+          </div>
           <p class="profile__profession">Исследователь&nbsp;океана</p>
         </div>
-        <button class="profile__add-button" type="button"></button>
+        <button class="profile__add-button" aria-label="добавить карточку" type="button"></button>
       </div>
 
-      <form class="popup">
-        <div class="popup__container">
-          <div class="popup__form">
-          <p class="popup__title">Редактировать профиль</p>
-          <input class="popup__input popup__input_name" type="text" value="">
-          <input class="popup__input popup__input_profession" type="text" value="">
-          <div class="popup__overlay"></div>
-          <input class="popup__button-submit" type="submit" value="Cохранить">
-        </div>
-        <button class="popup__button-close" type="button"></button>
-        </div>
-      </form>
-
-      <section class="elements">
+      <article class="elements">
 
         <div class="card">
           <img class="card__image" src="images/surskoe.jpg" alt="старая церковь в Карачаевске">
@@ -80,12 +67,24 @@
           <button class="card__like-button" type="button"></button>
         </div>
 
-      </section>
+      </article>
+
+      <div class="popup">
+        <div class="popup__container">
+          <form class="popup__form">
+            <h3 class="popup__title">Редактировать профиль</h3>
+            <input class="input input_name" name="author" type="text" value="">
+            <input class="input input_profession" name="profession" type="text" value="">
+            <input class="popup__button-submit" type="submit" value="Cохранить">
+          </form>
+          <button class="popup__button-close" aria-label="закрыть" type="button"></button>
+        </div>
+      </div>
 
     </main>
 
     <footer class="footer">
-      <p>&copy; 2020 Mesto Russia</p>
+      <p class="footer__capture">&copy; 2020 Mesto Russia</p>
 
 
     </footer>

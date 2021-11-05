@@ -1,11 +1,5 @@
 .profile__edit-button {
-  grid-row-start: 1;
-  grid-row-end: 2;
-  grid-column-start: 2;
-  align-self: flex-end;
   border: 1px solid white;
-  padding: 11px;
-  margin-bottom: 15px;
   background-color: transparent;
   outline: none;
   background-image: url(../../../images/editpen.svg);
@@ -14,10 +8,18 @@
   background-position: center;
   background-repeat: no-repeat;
   box-sizing: border-box;
-  height: 18px;
-  width: 18px;
+  height: 24px;
+  width: 24px;
   cursor: pointer;
   transition: ease-in-out 0.2s;
+  outline: green 1px solid;
+  margin-top: 24px;
+}
+
+@media screen and (max-width: 900px) {
+  .profile__edit-button {
+    margin-bottom: 15px;
+  }
 }
 
 @media screen and (max-width: 500px) {
@@ -25,7 +27,7 @@
     padding: 8px;
     margin: 0;
     margin-left: 10px;
-    margin-bottom: 12px;
+    margin-top: 24px;
     width: 16px;
     height: 16px;
   }

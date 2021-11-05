@@ -3,4 +3,12 @@
   grid-template-columns: minmax(30px,auto) 430px minmax(30px,auto);
   grid-template-rows: minmax(30px,auto) 330px minmax(30px,auto);
   z-index: 2;
+
+}
+
+@media screen and (max-width: 450px) {
+  .popup__container {
+    grid-template-columns: minmax(30px,auto) minmax(282px, auto) minmax(30px,auto);
+    grid-template-rows: minmax(36px,auto) 322px minmax(20px,auto);
+  }
 }
