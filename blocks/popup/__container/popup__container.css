@@ -1,14 +1,18 @@
 .popup__container {
-  display: grid;
-  grid-template-columns: minmax(30px,auto) 430px minmax(30px,auto);
-  grid-template-rows: minmax(30px,auto) 330px minmax(30px,auto);
   z-index: 2;
-
+  background-color: white;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  max-width: 430px;
 }
 
 @media screen and (max-width: 450px) {
   .popup__container {
-    grid-template-columns: minmax(30px,auto) minmax(282px, auto) minmax(30px,auto);
-    grid-template-rows: minmax(36px,auto) 322px minmax(20px,auto);
+    max-width: 88.125vw;;
   }
 }
+
+/* запутался как сделать выносной крестик-закрытие
+если форма меньше контейнера, то можно было сделать грид, где форма займет середину, а крестик крайний столбец.
+но форма только под форму...тогда вынести крести можно только абсолютным позиционированием вне контейнера
+вынес отрицательным отступом */

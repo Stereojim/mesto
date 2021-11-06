@@ -1,12 +1,12 @@
 .popup__form {
-  grid-column-start: 2;
-  grid-column-end: 3;
-  grid-row-start: 2;
-  grid-row-end: 3;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
-  align-items: center;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  margin: auto;
+  width: 83.255814%;
+}
+
+@media screen and (max-width: 450px) {
+  .popup__form {
+  }
 }

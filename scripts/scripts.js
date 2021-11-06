@@ -3,16 +3,14 @@ let editButton = document.querySelector(".profile__edit-button");
 let closePopapButton = document.querySelector(".popup__button-close");
 let person = document.querySelector(".profile__name");
 let profession = document.querySelector(".profile__profession");
-let nameInput = document.querySelector(".input_name");
-let professionInput = document.querySelector(".input_profession");
+let nameInput = document.querySelector("#name");
+let professionInput = document.querySelector("#profession");
 let submitForm = document.querySelector(".popup");
 
 function openPopap() {
   popup.classList.add("popup_opened");
-  let defaultName = person.textContent;
-  let defaulProfession = profession.textContent;
-  nameInput.value = defaultName;
-  professionInput.value = defaulProfession;
+  nameInput.value = person.textContent;
+  professionInput.value = profession.textContent;
 }
 
 function closePopap() {
@@ -25,7 +23,7 @@ function formSubmitHandler(evt) {
   let newProfession = professionInput.value;
   person.textContent = newName;
   profession.textContent = newProfession;
-  popup.classList.remove("popup_opened");
+  closePopap() ;
 }
 
 submitForm.addEventListener("submit", formSubmitHandler);

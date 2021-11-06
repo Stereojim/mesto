@@ -71,13 +71,14 @@
 
       <div class="popup">
         <div class="popup__container">
-          <form class="popup__form">
+          <form class="popup__form" name="editAuthorForm">
+            <button class="popup__button-close" aria-label="закрыть" type="button"></button>
             <h3 class="popup__title">Редактировать профиль</h3>
-            <input class="input input_name" name="author" type="text" value="">
-            <input class="input input_profession" name="profession" type="text" value="">
+            <input class="popup__input" id="name" name="author" type="text" value="">
+            <input class="popup__input" id="profession" name="profession" type="text" value="">
             <input class="popup__button-submit" type="submit" value="Cохранить">
+
           </form>
-          <button class="popup__button-close" aria-label="закрыть" type="button"></button>
         </div>
       </div>
 
