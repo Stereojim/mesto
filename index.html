@@ -91,6 +91,16 @@
     </footer>
 
   </div>
+  <template id="place-template">
+    <div class="popup popup_opened">
+      <div class="popup__container">
+        <form class="popup__form" name="addPlaceForm">
+          <button class="popup__button-close" id="closePlaceAdd" aria-label="закрыть" type="button"></button>
+          <h3 class="popup__title">Новое место</h3>
+          <input class="popup__input" id="placeName" name="placeName" type="text" value="Название">
+          <input class="popup__input" id="pictureLink" name="pictureLink" type="text" value="Ссылка на картинку">
+          <input class="popup__button-submit" type="submit" value="Создать">
+  </template>
   <script src="scripts/scripts.js"></script>
 </body>
 
