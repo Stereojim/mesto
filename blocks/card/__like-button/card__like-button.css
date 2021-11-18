@@ -1,17 +1,16 @@
 .card__like-button {
+  position: absolute;
+  height: 19px;
+  width: 22px;
   background-image: url(../../../images/like-button_disabled.svg);
-  grid-column-start: 2;
-  grid-column-end: 3;
-  grid-row-start: 2;
-  grid-row-end: 3;
   margin: 0;
   border: none;
   outline: none;
-  background-color: white;
-  background-position: center;
-  background-repeat: no-repeat;
-  padding: 11px;
-  box-sizing: border-box;
+  background-color: transparent;
+  align-self: flex-end;
+  justify-self: flex-end;
+  margin-right: 20px;
+  margin-bottom: 30px;
   cursor: pointer;
   transition: ease-in-out 0.2s;
 }
@@ -20,7 +19,3 @@
   opacity: 0.5;
 }
 
-.card__like-button:active {
-  opacity: 1;
-  background-image: url(../../../images/liked.svg);
-}
