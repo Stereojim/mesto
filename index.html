@@ -30,36 +30,10 @@
       </div>
 
       <article class="elements">
-
-
-<!--         <div class="card">
-          <img class="card__image" src="images/vyas.jpg" alt="горы Домбая">
-          <h2 class="card__place-name">Большой Вьяс</h2>
-          <button class="card__like-button" type="button"></button>
-        </div>
-
-        <div class="card">
-          <img class="card__image" src="images/vyadya.jpg" alt="Эльбрус на рассвете">
-          <h2 class="card__place-name">Вядя</h2>
-          <button class="card__like-button card__like-button_active" type="button"></button>
-        </div>
-
-        <div class="card">
-          <img class="card__image" src="images/tank.jpg" alt="горы Домбая">
-          <h2 class="card__place-name">Танковый пруд</h2>
-          <button class="card__like-button" type="button"></button>
-        </div>
-
-        <div class="card">
-          <img class="card__image" src="images/akhyn.jpg" alt="старая церковь в Карачаевске">
-          <h2 class="card__place-name">Ахунский лес</h2>
-          <button class="card__like-button" type="button"></button>
-        </div> -->
-
       </article>
 
       <div class="popup">
-        <div class="popup__container">
+        <div class="popup__container" id="personCard">
           <form class="popup__form" name="editAuthorForm">
             <button class="popup__button-close" aria-label="закрыть" type="button"></button>
             <h3 class="popup__title">Редактировать профиль</h3>
@@ -86,17 +60,17 @@
         <form class="popup__form" name="addPlaceForm">
           <button class="popup__button-close" id="closePlaceAdd" aria-label="закрыть" type="button"></button>
           <h3 class="popup__title">Новое место</h3>
-          <input class="popup__input" id="placeName" name="placeName" type="text" value="" placeholder="Название">
-          <input class="popup__input" id="pictureLink" name="pictureLink" type="text" value="" placeholder="Ссылка на картинку">
-          <input class="popup__button-submit" type="button" value="Создать">
+          <input class="popup__input" id="placeName" name="placeName" type="text" value="" required placeholder="Название">
+          <input class="popup__input" id="pictureLink" name="pictureLink" type="text" value="" required placeholder="Ссылка на картинку">
+          <button class="popup__button-submit button" type="submit" value="">Создать</button>
   </template>
 
   <template id="placeCard">
     <div class="card">
       <img class="card__image" src="" alt="">
       <h2 class="card__place-name"></h2>
-      <button class="card__like-button" type="button"></button>
-      <button class="card__remove-button" type="button"></button>
+      <button class="card__like-button" type="button" aria-label="поставить лайк"></button>
+      <button class="card__remove-button" type="button" aria-label="удалить карточку"></button>
     </div>
   </template>
 

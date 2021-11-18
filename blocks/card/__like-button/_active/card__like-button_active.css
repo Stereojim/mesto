@@ -2,3 +2,11 @@
 box-sizing: border-box;
 background-image: url(../../../../images/like.svg);
 }
+
+.card__like-button_active:hover {
+  opacity: 1;
+}
+
+
+
+

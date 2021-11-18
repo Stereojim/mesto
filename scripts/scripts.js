@@ -7,7 +7,7 @@ const nameInput = document.querySelector("#name");
 const professionInput = document.querySelector("#profession");
 let placeName = document.querySelector("#placeName");
 let pictureLink = document.querySelector("#pictureLink");
-const submitForm = document.querySelector(".popup__container");
+const submitForm = document.querySelector("#personCard");
 const addPlaceButton = document.querySelector(".profile__add-button");
 const closePlaceAdd = document.querySelector("#closePlaceAdd");
 const places = document.querySelector(".elements");
@@ -41,12 +41,35 @@ const initialCards = [
   },
 ];
 
-initialCards.unshift({
+
+// прямое добавление в массив
+
+/* initialCards.unshift({
   name: "мишка",
   link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
+
+}); */
+
+
+
+// рендеринг карточек из массива
+
+const createPlacesDomNode = (item) => {
+  const placeCardTemplate = placeCard.querySelector('.card').cloneNode(true);
+  placeCardTemplate.querySelector('.card__place-name').textContent = item.name;
+  placeCardTemplate.querySelector('.card__image').src = item.link;
+
+  return placeCardTemplate;
+
+}
+
+const result = initialCards.map((item) => {
+  return createPlacesDomNode(item);
 });
 
-// добавление всех карточек массива
+places.append(...result);
+
+/* // альтернативное добавление карточек массива
 
 initialCards.forEach(function (element) {
   const cardElement = placeCard.cloneNode(true);
@@ -57,7 +80,7 @@ initialCards.forEach(function (element) {
 
   places.append(cardElement);
   
-});
+}); */
 
 // добавление и открытие попапа для создания новой карточки
 
@@ -65,8 +88,6 @@ function addPlace() {
   const placeTemplate = document.querySelector("#place-template").content;
   const newPlace = placeTemplate.querySelector(".popup").cloneNode(true);
  
-  placeName = "";
-  pictureLink= "";
   places.append(newPlace);
 
   function cancelAddingPlace() {
@@ -75,76 +96,62 @@ function addPlace() {
 
   let closePlaceAdd = document.querySelector("#closePlaceAdd");
   closePlaceAdd.addEventListener("click", cancelAddingPlace);
+
+
 }
 
-// закрытие формы для создания карточки места
-
-/* function closeAddPlacePopup() {
-  newPlace.classList.remove("popup_opened");
-} */
-
-// сохранение карточки
-
-function addPlaceCard(evt) {
+const placeSubmitFormHandler = (evt) => {
   evt.preventDefault();
-  closePlaceAdd()
+  alert("hello there!");
+}; 
 
-  const newCard = placeCard.querySelector(".card").cloneNode(true);
-  newCard.querySelector(".card__image").src = pictureLink.value;
-  newCard.querySelector(".card__place-name").textContent = placeName.value;
-  places.append(newCard);
-
-};
-
-placePopupTemplate.addEventListener("click", addPlaceCard);
-
-/*  document.querySelector('.popup__button-submit').addEventListener("click", function () {
-  let place = placeName.value;
-  let picture = pictureLink.value;
-  
-  newCard.querySelector(".card__image").src = place;
-  newCard.querySelector(".card__place-name").textContent = picture;
+placePopupTemplate.addEventListener('submit', placeSubmitFormHandler);
 
 
-  addPlaceCard(place.value, picture.value);
 
-  place.value = " ";
-  picture.value = " "; 
-}) ; */
 
-// сохранение карточки с местом
 
-/*  function addPlaceSubmitHandler(evt) {
+// сохранение карточки 
+
+/* const cardFormSubmitHandler = (evt) => {
   evt.preventDefault();
 
-  const newPictureLink = pictureLink.value;
-  const newPlaceName = placeName.value;
+  const inputPlaceName = placeName.value;
+  const inputPistureLink = pictureLink.value;
 
-  document.querySelector(".card__image").src = newPictureLink;
-  cardElement.querySelector(".card__place-name").textContent = newPlaceName;
+  const placeString = createHTMLString({ name: inputPlaceName}, { link: inputPistureLink});
 
-  closeAddPlacePopup();
+  places.append(placeString);
+
+  placeName.value = '';
+  pictureLink.value = '';
+
+}
+
+placePopupTemplate.addEventListener('submit', cardFormSubmitHandler);
+
+ const createPlaceTemplate = (item) => {
+  const placeCardTemplate = placeCard.querySelector('.card').cloneNode(true);
+  placeCardTemplate.querySelector('#placeName').textContent = item.name;
+  placeCardTemplate.querySelector('#pictureLink').textContent = item.link;
+
+  return placeCardTemplate;
+
 }  */
+
+
+
+// document.querySelector('.place-submit').addEventListener('submit', placeSubmitFormHandler);
+
+
 
 // кнопки
 
 addPlaceButton.addEventListener("click", addPlace);
 
-// кнопка лайк
 
-/* function toggleLike() {
-  likeButton.classList.add(".card__like-button_active");
-}
-likeButton.addEventListener("click", toggleLike);  */
-
-// лайк карточки
-
-placeCard.querySelector(".card__like-button").addEventListener("click", function (evt) {
-     evt.currentTarget.classList.toggle("card__button-like_active");
-  });
 
 // редактирование профиля
-
 // открытие формы для редактирования профиля
 
 function openPopap() {
@@ -176,10 +183,7 @@ submitForm.addEventListener("submit", formSubmitHandler);
 editButton.addEventListener("click", openPopap);
 closePopapButton.addEventListener("click", closePopap);
 
-
-/* function deleteCard() {
-  document.querySelector('.card__remove-button').parentElement.remove()
-}; */
+// кнопка удаления карточки
 
 let removeButton = document.getElementsByClassName('card__remove-button');
 for (let i = 0; i < removeButton.length; i++) {
@@ -187,6 +191,8 @@ for (let i = 0; i < removeButton.length; i++) {
     e.currentTarget.parentNode.remove();
   }, false);
 };
+
+// лайк
 
 let likeButton = document.getElementsByClassName('card__like-button');
 for (let i = 0; i < likeButton.length; i++) {
