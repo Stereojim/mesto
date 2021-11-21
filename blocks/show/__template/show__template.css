@@ -1,0 +1,4 @@
+.show__template {
+display: flex;
+flex-direction: column;
+}

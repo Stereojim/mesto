@@ -10,6 +10,7 @@
   margin-top: -40px;
   align-self: flex-end;
   background-repeat: no-repeat;
+  z-index: 140;
 }
 
 .popup__button-close:hover {

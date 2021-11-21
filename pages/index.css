@@ -27,5 +27,12 @@
 @import url(../blocks/card/__like-button/card__like-button.css);
 @import url(../blocks/card/__like-button/_active/card__like-button_active.css);
 @import url(../blocks/card/__remove-button/card__remove-button.css);
+@import url(../blocks/card/__image-button/card__image-button.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__capture/footer__capture.css);
+@import url(../blocks/show/show.css);
+@import url(../blocks/show/__template/show__template.css);
+@import url(../blocks/show/__title/show__title.css);
+@import url(../blocks/show/__picture/show__picture.css);
+@import url(../blocks/show/__close-button/show__close-button.css);
+
