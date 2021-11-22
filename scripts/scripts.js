@@ -13,7 +13,6 @@ const closePlaceAdd = document.querySelector("#closePlaceAdd");
 const places = document.querySelector(".elements");
 const placeCard = document.querySelector("#placeCard").content;
 const placePopupTemplate = document.querySelector("#place-template");
-const showCard = document.querySelector("#showCard").content;
 
 const initialCards = [
   {
@@ -48,12 +47,7 @@ function createPlacesDomNode(item) {
   const placeCardTemplate = placeCard.querySelector(".card").cloneNode(true);
   placeCardTemplate.querySelector(".card__place-name").textContent = item.name;
   placeCardTemplate.querySelector(".card__image").src = item.link;
-
-  function openPicture() {
-    showPicture.style.display = "flex";
-    bigPicture.src = this.src;
-    captionText.innerHTML = this.alt;
-  }
+  placeCardTemplate.querySelector(".card__image").alt = item.name;
 
   return placeCardTemplate;
 }
@@ -66,14 +60,14 @@ const result = initialCards.map((item) => {
 
 places.append(...result);
 
+/* likeCardButton(); */
 
+// кнопка открытия формы создания новой карточки места
 
-  // кнопка открытия формы создания новой карточки места
-
-  addPlaceButton.addEventListener("click", function () {
-    addPlace();
-    document.getElementById("placePopup").classList.add("popup_opened");
-  });
+addPlaceButton.addEventListener("click", function () {
+  addPlace();
+  document.getElementById("placePopup").classList.add("popup_opened");
+});
 
 // добавление и открытие попапа для создания новой карточки
 
@@ -119,15 +113,20 @@ function addPlace() {
     // закрытие после сохранения
     cancelAddingPlace();
 
-
-    // странно работающий лайк (через раз)
-    likeCardButton();
+    const like = document.querySelectorAll(".card__like-button");
+    [].forEach.call(like, function (el) {
+      el.onclick = function (e) {
+        const eventTarget = e.target;
+        eventTarget.classList.toggle("card__like-button_active");
+      };
+    });
   };
 
-    // кнопка создать
-  document.querySelector("#placePopup").addEventListener("submit", placeSubmitFormHandler);
+  // кнопка создать
+  document
+    .querySelector("#placePopup")
+    .addEventListener("submit", placeSubmitFormHandler);
 }
-
 
 // редактирование профиля
 // открытие формы для редактирования профиля
@@ -174,8 +173,10 @@ for (let i = 0; i < removeButton.length; i++) {
   );
 }
 
+// лайки
+// функция
 
-function likeCardButton() {
+/* function likeCardButton() {
   const likeButton = document.getElementsByClassName("card__like-button");
   for (let i = 0; i < likeButton.length; i++) {
     likeButton[i].addEventListener(
@@ -184,11 +185,11 @@ function likeCardButton() {
         evt.currentTarget.classList.toggle("card__like-button_active");
       },
       false
-    );
+    )
   }
-}
+}; */
 
-// лайк
+// объект
 
 /* const likeButton = document.getElementsByClassName("card__like-button");
 for (let i = 0; i < likeButton.length; i++) {
@@ -201,6 +202,126 @@ for (let i = 0; i < likeButton.length; i++) {
   );
 } */
 
+// лайк по практикуму
+
+/* likeButton.addEventListener('click', function (evt) {
+  const eventTarget = evt.target;
+  eventTarget.classList.toggle('card__like-button_active');
+  }); */
 
 const DOM = document.querySelectorAll("*");
 console.log(DOM);
+
+/* openPicture = document.getElementById('show');
+picture = document.getElementById('card');
+
+picture.addEventListener('click', function (evt) {
+const picture = evt.target;
+picture.classList.toggle('show') 
+}
+); */
+
+// лайк поиск по всем (работает!)
+
+const like = document.querySelectorAll(".card__like-button");
+[].forEach.call(like, function (el) {
+  el.onclick = function (e) {
+    const eventTarget = e.target;
+    eventTarget.classList.toggle("card__like-button_active");
+  };
+});
+
+/* const originPicture = document.querySelector('.card__image');
+[].forEach.call( originPicture, function(el) {
+  el.onclick = function(e) {
+  pictureView = e.target;
+  pictureView = showCard.querySelector(".show").cloneNode(true);
+  pictureView.querySelector(".show__title").textContent = this.name;
+  pictureView.querySelector(".show__picture").src = this.src;
+  pictureView.querySelector(".show__picture").alt = this.name;
+  return pictureView;
+  }
+}); */
+
+
+window.onload = function () {
+	const imgArr = document.getElementsByClassName('card__image');
+  const modalWindow = document.querySelector('.show');
+  const modalImg = document.querySelector('.show__picture');
+  const caption = document.querySelector('.show__title');
+  const closeImg = document.querySelector('.show__close-button')
+
+  for(i = 0; i<imgArr.length; i++) {
+    const picture = imgArr[i];
+    picture.onclick = function() {
+      openImg(this);
+    }
+  }
+
+  function openImg(pic) {
+    modalWindow.style.display = 'flex';
+    modalImg.src = pic.src;
+    modalImg.alt = pic.alt;
+    caption.innerHTML = pic.alt;
+  }
+
+  function close() {
+    modalWindow.style.display = 'none';
+  }
+
+  closeImg.onclick = function() {
+    modalWindow.style.transform = 'transition(opacity ease 5s)'
+    setTimeout( close, 100);
+  }
+}
+
+
+
+
+
+/* const showCard = document.querySelector(".show");
+
+function openBigPicture(event) {
+  showCard.classList.add("show_opened");
+
+const title = event.currentTarget.dataset('.card__name').textContent;
+const link = document.querySelector('.card__image').src;
+
+  showCard.querySelector(".show__title").textContent = event.title;
+  showCard.querySelector(".show__picture").src = event.src;
+  showCard.querySelector(".show__picture").alt = title;
+
+} */
+
+
+
+/*   const curPic  = evt.target.dataset.btn;
+if (curPic === 'pic') {
+  console.log('эта карточка');
+}
+}; */
+
+
+
+/*   showCard.querySelector(".show__title").textContent = curPic.querySelector('.card__place-name').textContent;
+  showCard.querySelector(".show__picture").src =
+    "https://images.unsplash.com/photo-1626224574073-23989ea25ae8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=710&q=80";
+  showCard.querySelector(".show__picture").alt = "this.name";
+  return showCard;
+} */
+
+document.addEventListener("click", (event) => {
+  /* event.preventDefault(); */
+  const picType = event.target.dataset.btn;
+
+  if (picType === "pic") {
+    openBigPicture();
+  }
+});
+
+function closePicture() {
+  showCard.classList.remove("show_opened");
+}
+
+const closePictureButton = document.querySelector(".show__close-button");
+closePictureButton.addEventListener("click", closePicture);

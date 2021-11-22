@@ -69,30 +69,23 @@
 
   <template id="placeCard">
     <div class="card">
-    <!--   <button type="button" class="card__image-button"> -->
-        <img id="basicPicture" class="card__image" src="" alt="петя">
-      <!-- </button> -->
+        <img id="basicPicture" class="card__image" data-btn="pic" src="" alt="">
       <h2 class="card__place-name"></h2>
       <button class="card__like-button" type="button" aria-label="поставить лайк"></button>
       <button class="card__remove-button" type="button" aria-label="удалить карточку"></button>
-      <div class="show" id=showPicture>
-        <span class="popup__button-close" onclick="document.getElementById('showPicture').style.display='none'"></span>
-        <img class="show__picture" id="bigPicture"> 
-        <div id="caption" class="show__title"></div>   
-      </div>
     </div>
   </template>
 
-<template id="showCard">
+
   <div class="show">
     <figure class="show__template">
       <button class="popup__button-close show__close-button" aria-label="закрыть" type="button"></button>
       <img class="show__picture"
-        src="">
+        src="" alt="">
       <figcaption class="show__title"></figcaption>
     </figure>
   </div>
-  </template> 
+
 
 
   <script src="scripts/scripts.js"></script>

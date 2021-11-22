@@ -1,5 +1,4 @@
-.show {
-    display: none; 
+.show { 
     position: fixed;
     content: "";
     width: 100%;
@@ -10,6 +9,6 @@
     left: 0;
     align-items: center;
     justify-content: center;
-    
+    display: none;
   }
 
