@@ -41,6 +41,8 @@ const initialCards = [
   },
 ];
 
+// Кусок про создание новых карточек
+
 // рендеринг карточки из массива
 
 function createPlacesDomNode(item) {
@@ -53,7 +55,6 @@ function createPlacesDomNode(item) {
 }
 
 // применение ко всему массиву
-
 
 const result = initialCards.map((item) => {
   return createPlacesDomNode(item);
@@ -98,7 +99,7 @@ function addPlace() {
       link: inputPictureLink,
     });
 
-  
+   
     places.prepend(cardString);
 
 
@@ -126,13 +127,7 @@ function addPlace() {
     });
   };
 
-
 // кнопка открытия формы создания новой карточки места
-
-
-
-
-
 
   // кнопка создать
   document
@@ -143,10 +138,47 @@ function addPlace() {
 
 
 
+// открытие модального окна с фоткой и подписью
 
+window.onload = function () {
+  const imgArr = document.getElementsByClassName("card__image");
+  const modalWindow = document.querySelector(".show");
+  const modalImg = document.querySelector(".show__picture");
+  const caption = document.querySelector(".show__title");
+  const closeImg = document.querySelector(".show__close-button");
 
+  // поиск места клика
 
-// редактирование профиля
+  for (i = 0; i < imgArr.length; i++) {
+    const picture = imgArr[i];
+    picture.onclick = function () {
+      openImg(this);
+    };
+  }
+
+  // открытие окна + прописывание src и title
+
+  function openImg(pic) {
+    modalWindow.style.display = "flex";
+    modalImg.src = pic.src;
+    modalImg.alt = pic.alt;
+    caption.innerHTML = pic.alt;
+  }
+
+  // скрытие модального окна
+
+  function close() {
+    modalWindow.style.display = "none";
+  }
+
+  closeImg.onclick = function () {
+    modalWindow.style.transform = "transition(opacity ease 5s)";
+    setTimeout(close, 100);
+  };
+};
+
+// Кусок про редактирование профиля на странице
+
 // открытие формы для редактирования профиля
 
 function openPopap() {
@@ -192,11 +224,6 @@ for (let i = 0; i < removeButton.length; i++) {
 }
 
 
-// просмотр dom
-
-const DOM = document.querySelectorAll("*");
-console.log(DOM);
-
 // лайк поиск по всем (работает!)
 
 const like = document.querySelectorAll(".card__like-button");
@@ -207,41 +234,8 @@ const like = document.querySelectorAll(".card__like-button");
   };
 });
 
-// открытие модального окна с фоткой и подписью
+// просмотр dom
 
-window.onload = function () {
-  const imgArr = document.getElementsByClassName("card__image");
-  const modalWindow = document.querySelector(".show");
-  const modalImg = document.querySelector(".show__picture");
-  const caption = document.querySelector(".show__title");
-  const closeImg = document.querySelector(".show__close-button");
-
-  // поиск места клика
-
-  for (i = 0; i < imgArr.length; i++) {
-    const picture = imgArr[i];
-    picture.onclick = function () {
-      openImg(this);
-    };
-  }
-
-  // открытие окна + прописывание src и title
-
-  function openImg(pic) {
-    modalWindow.style.display = "flex";
-    modalImg.src = pic.src;
-    modalImg.alt = pic.alt;
-    caption.innerHTML = pic.alt;
-  }
-
-  // скрытие модального окна
-
-  function close() {
-    modalWindow.style.display = "none";
-  }
-
-  closeImg.onclick = function () {
-    modalWindow.style.transform = "transition(opacity ease 5s)";
-    setTimeout(close, 100);
-  };
-};
+/* const DOM = document.querySelectorAll("*");
+console.log(DOM);
+ */
