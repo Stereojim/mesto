@@ -13,6 +13,7 @@ const closePlaceAdd = document.querySelector('#closePlaceAdd');
 const places = document.querySelector('.elements');
 const placeCard = document.querySelector('#placeCard').content;
 const placePopupTemplate = document.querySelector('#place-template');
+const placePopup = document.getElementById('placePopup');
 
 const initialCards = [
   {
@@ -63,9 +64,7 @@ const result = initialCards.map((item) => {
 places.append(...result);
 
 
-  function cancelAddingPlace() {
-    newPlace.remove();
-  }
+  // кнопка открытия формы создания новой карточки места
 
   addPlaceButton.addEventListener("click", function () {
     addPlace();
@@ -75,17 +74,11 @@ places.append(...result);
 // добавление и открытие попапа для создания новой карточки
 
 function addPlace() {
-  const placeTemplate = document.querySelector("#place-template").content;
-  const newPlace = placeTemplate.querySelector(".popup").cloneNode(true);
-  places.append(newPlace);
-
-  function cancelAddingPlace() {
-    newPlace.remove();
-  }
+  placePopup.classList.add("popup_opened");
+};
 
   // кнопка закрытия формы создания новой карточки места
 
-  const closePlaceAdd = document.querySelector("#closePlaceAdd");
   closePlaceAdd.addEventListener("click", cancelAddingPlace);
 
   // сохранение карточки с кнопками удаления и лайка
@@ -99,10 +92,9 @@ function addPlace() {
       link: inputPictureLink,
     });
 
-   
     places.prepend(cardString);
-
-
+    cancelAddingPlace();
+  
     // дубль кнопки удаления для нового объекта
     const removeButton = document.getElementsByClassName("card__remove-button");
     for (let i = 0; i < removeButton.length; i++) {
@@ -114,28 +106,29 @@ function addPlace() {
         false
       );
     }
-
-    // закрытие после сохранения
-    cancelAddingPlace();
-
+    
+    // дубль лайка
     const like = document.querySelectorAll(".card__like-button");
     [].forEach.call(like, function (el) {
       el.onclick = function (e) {
         const eventTarget = e.target;
         eventTarget.classList.toggle("card__like-button_active");
       };
-    });
-  };
+    }); 
 
-// кнопка открытия формы создания новой карточки места
+       // закрытие после сохранения
+       cancelAddingPlace();
+  }
 
-  // кнопка создать
-  document
-    .querySelector('.popup')
-    .addEventListener("submit", placeSubmitFormHandler);
+
+
+// кнопка сохранить
+placePopup.addEventListener("submit", placeSubmitFormHandler);
+
+// кнопка закрыть
+function cancelAddingPlace() {
+   placePopup.classList.remove("popup_opened");
 }
-
-
 
 
 // открытие модального окна с фоткой и подписью
