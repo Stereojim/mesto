@@ -54,7 +54,8 @@
     </footer>
 
   </div>
- <template id="place-template">
+
+  <template id="place-template">
     <div class="popup" id="placePopup">
       <div class="popup__container">
         <form class="popup__form" name="addPlaceForm">
@@ -65,11 +66,14 @@
           <input class="popup__input pictureLink" id="pictureLink" name="pictureLink" type="text" value="" required
             placeholder="Ссылка на картинку">
           <button class="popup__button-submit button" type="submit" value="">Создать</button>
- </template>
+        </form> 
+      </div>   
+    </div>
+  </template>
 
   <template id="placeCard">
     <div class="card">
-        <img id="basicPicture" class="card__image" data-btn="pic" src="" alt="">
+      <img id="basicPicture" class="card__image" data-btn="pic" src="" alt="">
       <h2 class="card__place-name"></h2>
       <button class="card__like-button" type="button" aria-label="поставить лайк"></button>
       <button class="card__remove-button" type="button" aria-label="удалить карточку"></button>
@@ -79,14 +83,11 @@
 
   <div class="show">
     <figure class="show__template">
-      <button class="popup__button-close show__close-button" aria-label="закрыть" type="button"></button>
-      <img class="show__picture"
-        src="" alt="">
+      <button class="show__close-button" aria-label="закрыть" type="button"></button>
+      <img class="show__picture" src="https://images.unsplash.com/photo-1636520529043-8fdaac4701e1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1139&q=80" alt="туманные горы">
       <figcaption class="show__title"></figcaption>
     </figure>
   </div>
-
-
 
   <script src="scripts/scripts.js"></script>
 </body>
