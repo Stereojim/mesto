@@ -1,23 +1,4 @@
 .show {
-  position: fixed;
-  content: "";
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 1;
-  top: 0;
-  left: 0;
-  align-items: center;
-  justify-content: center;
-  display: none;
-  animation: modal 0.4s ease-out;
-}
-
-@keyframes modal {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+  display: flex;
+  flex-direction: column;
 }
