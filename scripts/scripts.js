@@ -1,48 +1,32 @@
-const popup = document.querySelector('.popup');
 const editButton = document.querySelector('.profile__edit-button');
-const closePopapButton = document.querySelector('.popup__button-close');
 const person = document.querySelector('.profile__name');
 const profession = document.querySelector('.profile__profession');
-const nameInput = document.querySelector("#name");
-const professionInput = document.querySelector('#profession');
+const nameInput = document.querySelector('.author');
+const professionInput = document.querySelector('.profession');
 const placeName = document.querySelector('placeName');
-const pictureLink = document.querySelector('#pictureLink');
-const submitForm = document.querySelector('#personCard');
-const addPlaceButton = document.querySelector('.profile__add-button');
-const closePlaceAdd = document.querySelector('#closePlaceAdd');
 const places = document.querySelector('.elements');
 const placeCard = document.querySelector('#placeCard').content;
-const placePopupTemplate = document.querySelector('#place-template');
-const placePopup = document.getElementById('placePopup');
+const popup = document.querySelector('.popup');
+const profileForm = document.querySelector('.profile-edit');
+const placeForm = document.querySelector('.place-create');
+const pictureShow = document.querySelector('.picture-open');
+const editProfileButton = document.querySelector('.profile__edit-button');
+const addPlaceButton = document.querySelector('.profile__add-button');
+const closePopapButton = document.querySelectorAll('.popup__button-close');
+const closeProfileEdit = document.querySelector('.profile-close');
+const closePlaceForm = document.querySelector('.place-close')
+const submitProfileButton = document.querySelector('.submit-profile');
+const submitCardButton = document.querySelector('.submit-card');
+const removeCardButton = document.querySelector('.card__remove-button');
+const cardLikeButton = document.querySelector('.card__like-button');
+const card = document.querySelector('.card');
+const cardImage = document.querySelector('.card__image');
 
-const initialCards = [
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-];
 
-// Кусок про создание новых карточек
+// убрал вызовы по id, но появилось много классов, созданных для поиска..
+// перенес слушатели функций на этап создания карточек - вроде работает
+// постарался закрепить футер, чтобы не полз за карточками наверх
+
 
 // рендеринг карточки из массива
 
@@ -52,9 +36,39 @@ function createPlacesDomNode(item) {
   placeCardTemplate.querySelector(".card__image").src = item.link;
   placeCardTemplate.querySelector(".card__image").alt = item.name;
 
+// удаление
+ placeCardTemplate.querySelector('.card__remove-button').addEventListener('click', function (evt) {
+    const removeTarget = evt.target;
+    removeTarget.parentNode.remove();
+  });
+// лайк
+  placeCardTemplate.querySelector('.card__like-button').addEventListener('click', function (evt) {
+    const likeTarget = evt.target;
+    likeTarget.classList.toggle("card__like-button_active");
+  });
+
+// открытие на весь экран
+  function showPicture() {
+    pictureShow.classList.add('popup_opened');
+
+    const modalImg = document.querySelector(".show__picture");
+    const caption = document.querySelector(".show__title");
+    /* const closeImg = document.querySelector(".show__close-button"); */
+    modalImg.src = placeCardTemplate.querySelector('.card__image').src;
+    modalImg.alt = placeCardTemplate.querySelector('.card__image').alt;
+    caption.textContent = placeCardTemplate.querySelector('.card__image').alt;
+  };
+  
+  placeCardTemplate.querySelector('.card__image').addEventListener('click', showPicture);
+  
+function closePicture () {
+  pictureShow.classList.remove('popup_opened');
+}
+document.querySelector('.show__close-button').addEventListener('click', closePicture);
+
   return placeCardTemplate;
 }
-
+ 
 // применение ко всему массиву
 
 const result = initialCards.map((item) => {
@@ -64,171 +78,60 @@ const result = initialCards.map((item) => {
 places.append(...result);
 
 
-  // кнопка открытия формы создания новой карточки места
+// открытие карточки редактирования профиля
 
-  addPlaceButton.addEventListener("click", function () {
-    addPlace();
-    document.getElementById("placePopup").classList.add("popup_opened");
-  });
-
-// добавление и открытие попапа для создания новой карточки
-
-function addPlace() {
-  placePopup.classList.add("popup_opened");
-};
-
-  // кнопка закрытия формы создания новой карточки места
-
-  closePlaceAdd.addEventListener("click", cancelAddingPlace);
-
-  // сохранение карточки с кнопками удаления и лайка
-
-  const placeSubmitFormHandler = (evt) => {
-    evt.preventDefault();
-    const inputPlaceName = document.querySelector("#placeName").value;
-    const inputPictureLink = document.querySelector("#pictureLink").value;
-    const cardString = createPlacesDomNode({
-      name: inputPlaceName,
-      link: inputPictureLink,
-    });
-
-    places.prepend(cardString);
-    cancelAddingPlace();
-  
-    // дубль кнопки удаления для нового объекта
-    const removeButton = document.getElementsByClassName("card__remove-button");
-    for (let i = 0; i < removeButton.length; i++) {
-      removeButton[i].addEventListener(
-        "click",
-        function (e) {
-          e.currentTarget.parentNode.remove();
-        },
-        false
-      );
-    }
-    
-    // дубль лайка
-    const like = document.querySelectorAll(".card__like-button");
-    [].forEach.call(like, function (el) {
-      el.onclick = function (e) {
-        const eventTarget = e.target;
-        eventTarget.classList.toggle("card__like-button_active");
-      };
-    }); 
-
-       // закрытие после сохранения
-       cancelAddingPlace();
-  }
-
-
-
-// кнопка сохранить
-placePopup.addEventListener("submit", placeSubmitFormHandler);
-
-// кнопка закрыть
-function cancelAddingPlace() {
-   placePopup.classList.remove("popup_opened");
-}
-
-
-// открытие модального окна с фоткой и подписью
-
-window.onload = function () {
-  const imgArr = document.getElementsByClassName("card__image");
-  const modalWindow = document.querySelector(".show");
-  const modalImg = document.querySelector(".show__picture");
-  const caption = document.querySelector(".show__title");
-  const closeImg = document.querySelector(".show__close-button");
-
-  // поиск места клика
-
-  for (i = 0; i < imgArr.length; i++) {
-    const picture = imgArr[i];
-    picture.onclick = function () {
-      openImg(this);
-    };
-  }
-
-  // открытие окна + прописывание src и title
-
-  function openImg(pic) {
-    modalWindow.style.display = "flex";
-    modalImg.src = pic.src;
-    modalImg.alt = pic.alt;
-    caption.innerHTML = pic.alt;
-  }
-
-  // скрытие модального окна
-
-  function close() {
-    modalWindow.style.display = "none";
-  }
-
-  closeImg.onclick = function () {
-    modalWindow.style.transform = "transition(opacity ease 5s)";
-    setTimeout(close, 100);
-  };
-};
-
-// Кусок про редактирование профиля на странице
-
-// открытие формы для редактирования профиля
-
-function openPopap() {
-  popup.classList.add("popup_opened");
+function editProfile() {
+  profileForm.classList.add('popup_opened');
   nameInput.value = person.textContent;
   professionInput.value = profession.textContent;
 }
+editProfileButton.addEventListener('click', editProfile);
 
-// закрытие формы для редактирования профиля
+// закрытие формы редактирования профиля
 
-function closePopap() {
-  popup.classList.remove("popup_opened");
+function closeProfileEdition() {
+profileForm.classList.remove('popup_opened');
 }
+closeProfileEdit.addEventListener('click', closeProfileEdition); 
 
-// сохранение данных профиля
+// сохранение профиля
 
-function formSubmitHandler(evt) {
+function saveNewProfile(evt) {
   evt.preventDefault();
   let newName = nameInput.value;
   let newProfession = professionInput.value;
   person.textContent = newName;
   profession.textContent = newProfession;
-  closePopap();
+  closeProfileEdition();
 }
+submitProfileButton.addEventListener('click', saveNewProfile);
 
-// кнопки
+// открытиe формы создания карточки места
 
-submitForm.addEventListener("submit", formSubmitHandler);
-editButton.addEventListener("click", openPopap);
-closePopapButton.addEventListener("click", closePopap);
-
-// кнопка удаления карточки
-
-const removeButton = document.getElementsByClassName("card__remove-button");
-for (let i = 0; i < removeButton.length; i++) {
-  removeButton[i].addEventListener(
-    "click",
-    function (e) {
-      e.currentTarget.parentNode.remove();
-    },
-    false
-  );
+function createNewPlace() {
+  placeForm.classList.add('popup_opened');  
 }
+addPlaceButton.addEventListener('click', createNewPlace);
 
+// закрытие формы создания карточки
 
-// лайк поиск по всем (работает!)
+function closeNewPlace() {
+  placeForm.classList.remove('popup_opened');  
+}
+closePlaceForm.addEventListener('click', closeNewPlace);
 
-const like = document.querySelectorAll(".card__like-button");
-[].forEach.call(like, function (el) {
-  el.onclick = function (e) {
-    const eventTarget = e.target;
-    eventTarget.classList.toggle("card__like-button_active");
-  };
-});
+// сохранение новой карточки
 
-// просмотр dom
+const placeSubmit = (evt) => {
+  evt.preventDefault();
+  const inputPlaceName = document.querySelector('.placeName').value;
+  const inputPictureLink = document.querySelector('.pictureLink').value;
+  const cardString = createPlacesDomNode({
+    name: inputPlaceName,
+    link: inputPictureLink,
+  });
 
-/* const DOM = document.querySelectorAll("*");
-console.log(DOM);
- */
+  places.prepend(cardString);
+  closeNewPlace();
+}
+placeForm.addEventListener('submit', placeSubmit);

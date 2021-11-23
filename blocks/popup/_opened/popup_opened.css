@@ -1,12 +1,4 @@
 .popup_opened {
-visibility: visible;
+  visibility: visible;
+  opacity: 1;
 }
-
-.popup_opened.transition .popup__container {
-  -webkit-transform: scale(1);
-	-moz-transform: scale(1);
-	-ms-transform: scale(1);
-	transform: scale(1);
-	opacity: 1;
-}
-

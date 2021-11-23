@@ -35,16 +35,37 @@
       <article class="elements">
       </article>
 
-      <div class="popup transition">
-        <div class="popup__container" id="personCard">
+      <div class="popup profile-edit">
+        <div class="popup__container">
           <form class="popup__form" name="editAuthorForm">
-            <button class="popup__button-close" aria-label="закрыть" type="button"></button>
+            <button class="popup__button-close profile-close" aria-label="закрыть" type="button"></button>
             <h3 class="popup__title">Редактировать профиль</h3>
-            <input class="popup__input" id="name" name="author" type="text" value="">
-            <input class="popup__input" id="profession" name="profession" type="text" value="">
-            <input class="popup__button-submit" type="submit" value="Cохранить">
+            <input class="popup__input author" name="author" type="text" value="">
+            <input class="popup__input profession" name="profession" type="text" value="">
+            <input class="popup__button-submit submit-profile" type="submit" value="Cохранить">
           </form>
         </div>
+      </div>
+
+      <div class="popup place-create">
+        <div class="popup__container">
+          <form class="popup__form" name="addPlaceForm">
+            <button class="popup__button-close place-close" aria-label="закрыть" type="button"></button>
+            <h3 class="popup__title">Новое место</h3>
+            <input class="popup__input placeName" name="placeName" type="text" value="" required placeholder="Название">
+            <input class="popup__input pictureLink" name="pictureLink" type="text" value="" required
+              placeholder="Ссылка на картинку">
+            <input class="popup__button-submit submit-card" type="submit" value="Создать">
+          </form>
+        </div>
+      </div>
+
+      <div class="popup picture-open">
+        <figure class="show__template">
+          <button class="show__close-button" aria-label="закрыть" type="button"></button>
+          <img class="show__picture" src="#" alt="">
+          <figcaption class="show__title"></figcaption>
+        </figure>
       </div>
 
     </main>
@@ -53,43 +74,20 @@
       <p class="footer__capture">&copy; 2020 Mesto Russia</p>
     </footer>
 
-  </div>
-
-    <div class="popup transition" id="placePopup">
-      <div class="popup__container">
-        <form class="popup__form" name="addPlaceForm">
-          <button class="popup__button-close" id="closePlaceAdd" aria-label="закрыть" type="button"></button>
-          <h3 class="popup__title">Новое место</h3>
-          <input class="popup__input placeName" id="placeName" name="placeName" type="text" value="" required
-            placeholder="Название">
-          <input class="popup__input pictureLink" id="pictureLink" name="pictureLink" type="text" value="" required
-            placeholder="Ссылка на картинку">
-          <button class="popup__button-submit button" type="submit" value="">Создать</button>
-        </form>
+    <template id="placeCard">
+      <div class="card">
+        <img class="card__image" src="#" alt="">
+        <h2 class="card__place-name"></h2>
+        <button class="card__like-button" type="button" aria-label="поставить лайк"></button>
+        <button class="card__remove-button" type="button" aria-label="удалить карточку"></button>
       </div>
-    </div>
- 
-  <template id="placeCard">
-    <div class="card">
-      <img id="basicPicture" class="card__image" data-btn="pic" src="#" alt="">
-      <h2 class="card__place-name"></h2>
-      <button class="card__like-button" type="button" aria-label="поставить лайк"></button>
-      <button class="card__remove-button" type="button" aria-label="удалить карточку"></button>
-    </div>
-  </template>
+    </template>
 
-
-  <div class="show">
-    <figure class="show__template">
-      <button class="show__close-button" aria-label="закрыть" type="button"></button>
-      <img class="show__picture"
-        src="#"
-        alt="">
-      <figcaption class="show__title"></figcaption>
-    </figure>
   </div>
 
+  <script src="scripts/cards.js"></script>
   <script src="scripts/scripts.js"></script>
+
 </body>
 
 </html>
