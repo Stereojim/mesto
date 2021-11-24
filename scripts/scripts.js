@@ -57,15 +57,8 @@ function createPlacesDomNode(item) {
     const caption = document.querySelector(".show__title");
     modalImg.src = placeCardTemplate.querySelector(".card__image").src;
     modalImg.alt = placeCardTemplate.querySelector(".card__image").alt;
-    caption.textContent = placeCardTemplate.querySelector(".card__image").alt;
-
-    
+    caption.textContent = placeCardTemplate.querySelector(".card__image").alt; 
   }
-// обработчик закрытия картинки
-  document.querySelector(".show__close-button").addEventListener("click", () => {
-    console.log('removePopup');
-    removePopup(pictureShow);
-  });
 
   // обработчик открытия картинки
   placeCardTemplate.querySelector(".card__image").addEventListener("click", () => {
@@ -77,6 +70,12 @@ function createPlacesDomNode(item) {
 
   return placeCardTemplate;
 }
+
+// обработчик закрытия картинки
+document.querySelector(".show__close-button").addEventListener("click", () => {
+  console.log('removePopup');
+  removePopup(pictureShow);
+});
 
 // применение ко всему массиву
 
