@@ -35,34 +35,34 @@
       <article class="elements">
       </article>
 
-      <div class="popup profile-edit">
+      <div class="popup popup_type_profile-edit">
         <div class="popup__container">
           <form class="popup__form" name="editAuthorForm">
-            <button class="popup__button-close profile-close" aria-label="закрыть" type="button"></button>
+            <button class="popup__button-close popup__button-close_type_profile-edit" aria-label="закрыть" type="button"></button>
             <h3 class="popup__title">Редактировать профиль</h3>
-            <input class="popup__input author" name="author" type="text" value="">
-            <input class="popup__input profession" name="profession" type="text" value="">
-            <input class="popup__button-submit submit-profile" type="submit" value="Cохранить">
+            <input class="popup__input popup__input_type_author" name="author" type="text" value="">
+            <input class="popup__input popup__input_type_profession" name="profession" type="text" value="">
+            <input class="popup__button-submit popup__button-submit_type_profile" type="submit" value="Cохранить">
           </form>
         </div>
       </div>
 
-      <div class="popup place-create">
+      <div class="popup popup_type_create-place">
         <div class="popup__container">
           <form class="popup__form" name="addPlaceForm">
-            <button class="popup__button-close place-close" aria-label="закрыть" type="button"></button>
+            <button class="popup__button-close popup__button-close_type_create-place" aria-label="закрыть" type="button"></button>
             <h3 class="popup__title">Новое место</h3>
-            <input class="popup__input placeName" name="placeName" type="text" value="" required placeholder="Название">
-            <input class="popup__input pictureLink" name="pictureLink" type="text" value="" required
+            <input class="popup__input popup__input_type_place-name" name="placeName" type="text" value="" required placeholder="Название">
+            <input class="popup__input popup__input_type_place-link" name="pictureLink" type="text" value="" required
               placeholder="Ссылка на картинку">
-            <input class="popup__button-submit submit-card" type="submit" value="Создать">
+            <input class="popup__button-submit popup__button-submit_type_card" type="submit" value="Создать">
           </form>
         </div>
       </div>
 
-      <div class="popup picture-open">
+      <div class="popup popup_type_picture-open">
         <figure class="show">
-          <button class="show__close-button" aria-label="закрыть" type="button"></button>
+          <button class="show__close-button popup__button-close" aria-label="закрыть" type="button"></button>
           <img class="show__picture" src="#" alt="">
           <figcaption class="show__title"></figcaption>
         </figure>
