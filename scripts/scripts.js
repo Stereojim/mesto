@@ -12,25 +12,14 @@ const pictureShow = document.querySelector(".popup_type_picture-open");
 const editProfileButton = document.querySelector(".profile__edit-button");
 const addPlaceButton = document.querySelector(".profile__add-button");
 const closePopapButton = document.querySelectorAll(".popup__button-close");
-const closeProfileEdit = document.querySelector(
-  ".popup__button-close_type_profile-edit"
-);
-const closePlaceForm = document.querySelector(
-  ".popup__button-close_type_create-place"
-);
-const submitProfileButton = document.querySelector(
-  ".popup__button-submit_type_profile"
-);
-const submitCardButton = document.querySelector(
-  ".popup__button-submit_type_card"
-);
+const closeProfileEdit = document.querySelector(".popup__button-close_type_profile-edit");
+const closePlaceForm = document.querySelector(".popup__button-close_type_create-place");
+const submitProfileButton = document.querySelector(".popup__button-submit_type_profile");
+const submitCardButton = document.querySelector(".popup__button-submit_type_card");
 const removeCardButton = document.querySelector(".card__remove-button");
 const cardLikeButton = document.querySelector(".card__like-button");
 const card = document.querySelector(".card");
 const cardImage = document.querySelector(".card__image");
-
-// добавил общую функцию добавления класса для открытия попапа
-// и функцию для удаления (через toggle одной функцией что-то не вышло - закрывает только первую карточку)
 
 // рендеринг карточки из массива
 
@@ -53,28 +42,25 @@ function createPlacesDomNode(item) {
 
   // открытие на весь экран
   function showPicture() {
-    const modalImg = document.querySelector(".show__picture");
-    const caption = document.querySelector(".show__title");
+    const modalImg = document.querySelector(".popup__picture");
+    const caption = document.querySelector(".popup__picture-title");
     modalImg.src = placeCardTemplate.querySelector(".card__image").src;
     modalImg.alt = placeCardTemplate.querySelector(".card__image").alt;
     caption.textContent = placeCardTemplate.querySelector(".card__image").alt; 
   }
 
-  // обработчик открытия картинки
+  // обработчик открытия картинки + подстановка данных
   placeCardTemplate.querySelector(".card__image").addEventListener("click", () => {
-      togglePopup(pictureShow);
+      openPopup(pictureShow);
+      showPicture();
     });
-
-  placeCardTemplate.querySelector(".card__image").addEventListener("click", showPicture);
-
 
   return placeCardTemplate;
 }
 
 // обработчик закрытия картинки
-document.querySelector(".show__close-button").addEventListener("click", () => {
-  console.log('removePopup');
-  removePopup(pictureShow);
+pictureShow.querySelector(".popup__button-close").addEventListener("click", () => {
+  closePopup(pictureShow);
 });
 
 // применение ко всему массиву
@@ -87,14 +73,14 @@ places.append(...result);
 
 // открытие карточки редактирования профиля
 editProfileButton.addEventListener("click", () => {
-  togglePopup(profileForm);
+  openPopup(profileForm);
   nameInput.value = person.textContent;
   professionInput.value = profession.textContent;
 });
 
 // закрытие формы редактирования профиля
 closeProfileEdit.addEventListener("click", () => {
-  removePopup(profileForm);
+  closePopup(profileForm);
 });
 
 // сохранение профиля
@@ -107,7 +93,7 @@ function saveNewProfile(evt) {
   profession.textContent = newProfession;
 
   // закрытие карточки
-  removePopup(profileForm);
+  closePopup(profileForm);
 }
 
 submitProfileButton.addEventListener("click", saveNewProfile);
@@ -115,16 +101,13 @@ submitProfileButton.addEventListener("click", saveNewProfile);
 // открытиe формы создания карточки места
 
 addPlaceButton.addEventListener("click", () => {
-  togglePopup(placeForm);
+  openPopup(placeForm);
 });
 
 // закрытие формы создания карточки
 
-/* function closeNewPlace() {
-  placeForm.classList.remove('popup_opened');  
-} */
 closePlaceForm.addEventListener("click", () => {
-  removePopup(placeForm);
+  closePopup(placeForm);
 });
 
 // сохранение новой карточки
@@ -139,17 +122,18 @@ const placeSubmit = (evt) => {
   });
 
   places.prepend(cardString);
-  removePopup(placeForm);
+  closePopup(placeForm);
 };
 
 placeForm.addEventListener("submit", placeSubmit);
 
 // функция открытия модального окна
-const togglePopup = function (evt) {
-  evt.classList.toggle("popup_opened");
+// toggle был ненастоящий - заменил на add, убрал аргумент evt
+const openPopup = function (popup) {
+  popup.classList.add("popup_opened");
 };
 
 // функция закрытия модального окна
-const removePopup = function (evt) {
-  evt.classList.remove("popup_opened");
+const closePopup = function (popup) {
+  popup.classList.remove("popup_opened");
 };
