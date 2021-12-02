@@ -137,3 +137,5 @@ const openPopup = function (popup) {
 const closePopup = function (popup) {
   popup.classList.remove("popup_opened");
 };
+
+
