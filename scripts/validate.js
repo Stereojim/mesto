@@ -12,6 +12,20 @@ const setEventListeners = () => {
     })
 }
 
+const setEventListenersSecondForm = () => {
+  const formElement = document.querySelector('.popup__form_profile_edit');
+  formElement.addEventListener('submit', e => e.preventDefault());
+  const inputList = Array.from(formElement.querySelector('.popup__input'));
+  const buttonElement = formElement.querySelector('.popup__button-submit');
+  toggleButtonState(formElement, buttonElement)
+  inputList.forEach((inputElement) => {
+      inputElement.addEventListener('input', () => {
+          checkInputValidity(formElement, inputElement) 
+          toggleButtonState(formElement, buttonElement)
+      })
+  })
+}
+
 const checkInputValidity = (formElement, inputElement) => {
     if (inputElement.validity.valid) {
         hideInputError(formElement, inputElement)
@@ -45,3 +59,4 @@ const toggleButtonState = (formElement, buttonElement) => {
 console.log('ghbdtn');
 
 setEventListeners();
+setEventListenersSecondForm();
