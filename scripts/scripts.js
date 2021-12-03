@@ -74,8 +74,8 @@ places.append(...result);
 // открытие карточки редактирования профиля
 editProfileButton.addEventListener("click", () => {
   openPopup(profileForm);
-  nameInput.value = person.textContent;
-  professionInput.value = profession.textContent;
+   nameInput.value = person.textContent;
+  professionInput.value = profession.textContent; 
 });
 
 // закрытие формы редактирования профиля
