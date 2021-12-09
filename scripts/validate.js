@@ -1,9 +1,11 @@
-    const hideInputError = (formElement, inputElement) => {
-  const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-  inputElement.classList.remove('popup__input_has-error');
-  errorElement.classList.remove('popup__error_visible');
-  errorElement.textContent = '';
-};
+
+
+/*     const hideInputError(formElement, inputElement) {
+    const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
+    inputElement.classList.remove('popup__input_has-error');
+    errorElement.classList.remove('popup__error_visible');
+    errorElement.textContent = '';
+}
 
 const showInputError = (formElement, inputElement, errorMessage) => {
 const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
@@ -42,7 +44,7 @@ const toggleButtonState = (formElement, buttonElement) => {
   buttonElement.classList.toggle('popup__button-submit_disabled', !isFormValid)
   buttonElement.disabled = !isFormValid;  
   }  
-
+ */
 
 
 

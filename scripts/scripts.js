@@ -85,18 +85,21 @@ closeProfileEdit.addEventListener("click", () => {
 
 // сохранение профиля
 
-function saveNewProfile(evt) {
-  evt.preventDefault();
+function saveNewProfile() {
   const newName = nameInput.value;
   const newProfession = professionInput.value;
   person.textContent = newName;
   profession.textContent = newProfession;
+  console.log('name: ', nameInput.value);
 
   // закрытие карточки
   closePopup(profileForm);
 }
 
-submitProfileButton.addEventListener("click", saveNewProfile);
+profileForm.querySelector('.popup__button-submit').addEventListener('submit', function (evt) {
+    evt.preventDefault()
+    saveNewProfile();
+})
 
 // открытиe формы создания карточки места
 

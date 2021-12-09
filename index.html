@@ -48,16 +48,16 @@
 
         <div class="popup popup_type_profile-edit">
           <div class="popup__container">
-            <form id="formProfile" class="popup__form popup__form_profile_edit" name="editAuthorForm">
+            <form id="formProfile" class="popup__form popup__form_profile_edit" name="editAuthorForm" novalidate>
 
               <button class="popup__button-close popup__button-close_type_profile-edit" aria-label="закрыть" type="button"></button>
 
               <h3 class="popup__title">Редактировать профиль</h3>
 
-                <input class="popup__input popup__input_type_author" id="author-input" name="author-input" type="text" minlength="2" maxlength="30" required placeholder="Название">
+                <input class="popup__input popup__input_type_author" id="author-input" name="author-input" type="text" minlength="2" maxlength="30" required placeholder="Название" />
                 <span class="popup__error" id="author-input-error"></span>
 
-                <input class="popup__input popup__input_type_profession" name="profession-input" id="profession-input" type="text" minlength="2" maxlength="200" required>
+                <input class="popup__input popup__input_type_profession" name="profession-input" id="profession-input" type="text" minlength="2" maxlength="200" required />
                 <span class="popup__error" id="profession-input-error"></span>
               
               <button class="popup__button-submit popup__button-submit_type_profile" type="submit" id="submit" value="Cохранить">Сохранить</button>
@@ -75,10 +75,10 @@
               <button class="popup__button-close popup__button-close_type_create-place" aria-label="закрыть" type="button"></button>
               <h3 class="popup__title">Новое место</h3>
 
-                <input class="popup__input popup__input_type_place-name" name="place-name-input" id="place-name-input" type="text" minlength="2" maxlength="30" required placeholder="Название">
+                <input class="popup__input popup__input_type_place-name" name="place-name-input" id="place-name-input" type="text" minlength="2" maxlength="30" required placeholder="Название" />
                 <span class="popup__error" id="place-name-input-error"></span>
 
-                <input class="popup__input popup__input_type_place-link" name="place-link-input" id="place-link-input" type="url" required placeholder="Ссылка на картинку">
+                <input class="popup__input popup__input_type_place-link" name="place-link-input" id="place-link-input" type="url" required placeholder="Ссылка на картинку" />
                 <span class="popup__error" id="place-link-input-error"></span>
        
               <button class="popup__button-submit popup__button-submit_type_card" type="submit" id="submit" value="Создать">Создать</button>
