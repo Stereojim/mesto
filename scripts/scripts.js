@@ -6,7 +6,11 @@ const professionInput = document.querySelector(".popup__input_type_profession");
 const places = document.querySelector(".elements");
 const placeCard = document.querySelector("#placeCard").content;
 const popup = document.querySelector(".popup");
+
 const profileForm = document.querySelector(".popup_type_profile-edit");
+const profileEditForm = profileForm.querySelector('.popup__form_profile_edit');
+const profileFormSumbitButton = profileForm.querySelector('.popup__button-submit');
+
 const placeForm = document.querySelector(".popup_type_create-place");
 const pictureShow = document.querySelector(".popup_type_picture-open");
 const editProfileButton = document.querySelector(".profile__edit-button");
@@ -59,6 +63,7 @@ function createPlacesDomNode(item) {
 }
 
 // обработчик закрытия картинки
+
 pictureShow.querySelector(".popup__button-close").addEventListener("click", () => {
   closePopup(pictureShow);
 });
@@ -72,13 +77,21 @@ const result = initialCards.map((item) => {
 places.append(...result);
 
 // открытие карточки редактирования профиля
+
 editProfileButton.addEventListener("click", () => {
   openPopup(profileForm);
    nameInput.value = person.textContent;
   professionInput.value = profession.textContent; 
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closePopup(profileForm)
+    }
+    });
 });
 
 // закрытие формы редактирования профиля
+
 closeProfileEdit.addEventListener("click", () => {
   closePopup(profileForm);
 });
@@ -92,20 +105,31 @@ function saveNewProfile() {
   profession.textContent = newProfession;
   console.log('name: ', nameInput.value);
 
-  // закрытие карточки
   closePopup(profileForm);
 }
 
-profileForm.querySelector('.popup__button-submit').addEventListener('submit', function (evt) {
+// сохранение карточки
+
+profileEditForm.addEventListener('submit', function (evt) {
     evt.preventDefault()
-    saveNewProfile();
-})
+    saveNewProfile()
+}); 
 
 // открытиe формы создания карточки места
 
 addPlaceButton.addEventListener("click", () => {
   openPopup(placeForm);
+
+  popup.addEventListener('click', console.log('asd')); 
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closePopup(placeForm)
+    }
+    }); 
 });
+
+
 
 // закрытие формы создания карточки
 
@@ -134,11 +158,14 @@ placeForm.addEventListener("submit", placeSubmit);
 // toggle был ненастоящий - заменил на add, убрал аргумент evt
 const openPopup = function (popup) {
   popup.classList.add("popup_opened");
+
 };
 
 // функция закрытия модального окна
 const closePopup = function (popup) {
   popup.classList.remove("popup_opened");
 };
+
+/* popup.addEventListener('click', closePopup); */
 
 
