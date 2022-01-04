@@ -155,7 +155,6 @@ const placeSubmit = (evt) => {
 placeForm.addEventListener("submit", placeSubmit);
 
 // функция открытия модального окна
-// toggle был ненастоящий - заменил на add, убрал аргумент evt
 const openPopup = function (popup) {
   popup.classList.add("popup_opened");
 
@@ -168,4 +167,12 @@ const closePopup = function (popup) {
 
 /* popup.addEventListener('click', closePopup); */
 
+/* popup.addEventListener('click', (evt) => {
+  evt.target;
+}); */
 
+/* document.onclick = function(event){
+  if ( event.target.className != 'popup_opened') {
+    popup.classList.remove("popup_opened")
+  }
+} */
