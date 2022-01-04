@@ -6,6 +6,7 @@ const professionInput = document.querySelector(".popup__input_type_profession");
 const places = document.querySelector(".elements");
 const placeCard = document.querySelector("#placeCard").content;
 const popup = document.querySelector(".popup");
+const popupContainer = document.querySelector('.popup__container');
 
 const profileForm = document.querySelector(".popup_type_profile-edit");
 const profileEditForm = profileForm.querySelector('.popup__form_profile_edit');
@@ -57,6 +58,15 @@ function createPlacesDomNode(item) {
   placeCardTemplate.querySelector(".card__image").addEventListener("click", () => {
       openPopup(pictureShow);
       showPicture();
+      
+    });
+
+    pictureShow.addEventListener('click', function(e) {
+      if (e.target.closest(".popup__container")) {
+  
+      } else {
+        closePopup(pictureShow)
+      }
     });
 
   return placeCardTemplate;
@@ -80,14 +90,23 @@ places.append(...result);
 
 editProfileButton.addEventListener("click", () => {
   openPopup(profileForm);
-   nameInput.value = person.textContent;
+  nameInput.value = person.textContent;
   professionInput.value = profession.textContent; 
+
+  profileForm.addEventListener('click', function(e) {
+    if (e.target.closest(".popup__container")) {
+
+    } else {
+      closePopup(profileForm)
+    }
+  });
 
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
       closePopup(profileForm)
     }
     });
+    
 });
 
 // закрытие формы редактирования профиля
@@ -120,7 +139,13 @@ profileEditForm.addEventListener('submit', function (evt) {
 addPlaceButton.addEventListener("click", () => {
   openPopup(placeForm);
 
-  popup.addEventListener('click', console.log('asd')); 
+  placeForm.addEventListener('click', function(e) {
+    if (e.target.closest(".popup__container")) {
+
+    } else {
+      closePopup(placeForm)
+    }
+  });
 
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
@@ -128,8 +153,6 @@ addPlaceButton.addEventListener("click", () => {
     }
     }); 
 });
-
-
 
 // закрытие формы создания карточки
 
@@ -157,7 +180,6 @@ placeForm.addEventListener("submit", placeSubmit);
 // функция открытия модального окна
 const openPopup = function (popup) {
   popup.classList.add("popup_opened");
-
 };
 
 // функция закрытия модального окна
@@ -165,14 +187,5 @@ const closePopup = function (popup) {
   popup.classList.remove("popup_opened");
 };
 
-/* popup.addEventListener('click', closePopup); */
 
-/* popup.addEventListener('click', (evt) => {
-  evt.target;
-}); */
 
-/* document.onclick = function(event){
-  if ( event.target.className != 'popup_opened') {
-    popup.classList.remove("popup_opened")
-  }
-} */
