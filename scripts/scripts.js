@@ -61,16 +61,16 @@ function createPlacesDomNode(item) {
       
     });
 
-    pictureShow.addEventListener('click', function(e) {
-      if (e.target.closest(".popup__container")) {
-  
-      } else {
-        closePopup(pictureShow)
-      }
-    });
-
   return placeCardTemplate;
 }
+
+pictureShow.addEventListener('click', function(e) {
+  if (e.target.closest(".popup__container")) {
+
+  } else {
+    closePopup(pictureShow)
+  }
+});
 
 // обработчик закрытия картинки
 
@@ -180,6 +180,7 @@ placeForm.addEventListener("submit", placeSubmit);
 // функция открытия модального окна
 const openPopup = function (popup) {
   popup.classList.add("popup_opened");
+  
 };
 
 // функция закрытия модального окна
