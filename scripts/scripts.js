@@ -24,6 +24,7 @@ const cardLikeButton = document.querySelector(".card__like-button");
 const card = document.querySelector(".card");
 const cardImage = document.querySelector(".card__image");
 
+
 // рендеринг карточки из массива
 
 function createPlacesDomNode(item) {
@@ -70,16 +71,33 @@ const result = initialCards.map((item) => {
 
 places.append(...result);
 
+//удаление на esc
+
+function closePopupByEsc(e) {
+  const openedPopup = document.querySelector('.popup_opened');
+  if (e.key === 'Escape') {
+    closePopup(openedPopup);
+  }
+};
+
+/*  function closePopupByClick(e) {
+  if (e.target.closest(".popup__container")) {
+  } else {
+    closePopup(openedPopup);
+  }
+};  
+  */
+
 // функция открытия модального окна
 
 const openPopup = function (popup) {
   popup.classList.add("popup_opened");
 
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') {
-      closePopup(popup)
-    }
-  });
+  // слушатель функции закрытия на esc
+  document.addEventListener('keydown', closePopupByEsc);
+
+  // слушатель клика на контейнер (закрытие попапа, если клик снаружи).
+  // не вижу его в "висящих" слушателях. При закрытии попапа не стал убирать. 
 
   popup.addEventListener('click', function (e) {
     if (e.target.closest(".popup__container")) {
@@ -94,22 +112,19 @@ const openPopup = function (popup) {
 // функция закрытия модального окна
 
 const closePopup = function (popup) {
+  //удаление слушателя событияю. Спасибо за комментарии - понял как посмотреть события в режиме разработчика
+  document.removeEventListener('keydown', closePopupByEsc);
+
   popup.classList.remove("popup_opened");
 
-  document.removeEventListener('keydown', function (e) {
-    if (e.key === 'Escape') {
-      closePopup(popup)
-    }
-  });
+  /* popup.removeEventListener('click', function (e) {
+      if (e.target.closest(".popup__container")) {
+  
+      } else {
+        closePopup(popup)
+      }
+    }); */
 
-  popup.removeEventListener('click', function (e) {
-    if (e.target.closest(".popup__container")) {
-
-    } else {
-      closePopup(popup)
-    }
-  });
-  /* Form.reset(popup) */
 };
 
 // открытие формы редактирования профиля
