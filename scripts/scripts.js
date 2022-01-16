@@ -92,21 +92,8 @@ function closePopupByEsc(e) {
 
 const openPopup = function (popup) {
   popup.classList.add("popup_opened");
-
   // слушатель функции закрытия на esc
   document.addEventListener('keydown', closePopupByEsc);
-
-  // слушатель клика на контейнер (закрытие попапа, если клик снаружи).
-  // не вижу его в "висящих" слушателях. При закрытии попапа не стал убирать. 
-
-  popup.addEventListener('click', function (e) {
-    if (e.target.closest(".popup__container")) {
-
-    } else {
-      closePopup(popup)
-    }
-  });
-
 };
 
 // функция закрытия модального окна
@@ -114,17 +101,7 @@ const openPopup = function (popup) {
 const closePopup = function (popup) {
   //удаление слушателя событияю. Спасибо за комментарии - понял как посмотреть события в режиме разработчика
   document.removeEventListener('keydown', closePopupByEsc);
-
   popup.classList.remove("popup_opened");
-
-  /* popup.removeEventListener('click', function (e) {
-      if (e.target.closest(".popup__container")) {
-  
-      } else {
-        closePopup(popup)
-      }
-    }); */
-
 };
 
 // открытие формы редактирования профиля
@@ -191,6 +168,32 @@ closeProfileEdit.addEventListener("click", () => {
 
 closePlaceForm.addEventListener("click", () => {
   closePopup(placeForm);
+});
+
+// слушатель закрытия для каждой формочки. слушатели на "клик" вроде бы не множатся
+
+profileForm.addEventListener('click', function (e) {
+  if (e.target.closest(".popup__container")) {
+
+  } else {
+    closePopup(profileForm)
+  }
+});
+
+placeForm.addEventListener('click', function (e) {
+  if (e.target.closest(".popup__container")) {
+
+  } else {
+    closePopup(placeForm)
+  }
+});
+
+pictureShow.addEventListener('click', function (e) {
+  if (e.target.closest(".popup__container")) {
+
+  } else {
+    closePopup(pictureShow)
+  }
 });
 
 
