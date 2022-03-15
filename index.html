@@ -44,7 +44,7 @@
           ></button>
         </div>
 
-        <article class="elements"></article>
+        <article class="elements card-list__items"></article>
 
         <div class="popup popup_type_profile-edit">
           <div class="popup__container">
@@ -108,7 +108,7 @@
         <p class="footer__capture">&copy; 2020 Mesto Russia</p>
       </footer>
 
-      <template id="placeCard">
+      <template id="placeCard" class="square-card">
         <div class="card">
           <img class="card__image" src="#" alt="" />
           <h2 class="card__place-name"></h2>
@@ -124,10 +124,14 @@
           ></button>
         </div>
       </template>
+
+
     </div>
 
-    <script src="scripts/cards.js"></script>
-    <script src="scripts/validate.js"></script>
-    <script src="scripts/scripts.js"></script>
-  </body>
+    <!-- <script src="scripts/cards.js"></script> -->
+    <!-- <script src="scripts/validate.js"></script> -->
+  <script src="scripts/Scripts.js"></script>
+<script type="module" src="scripts/FormValidator.js"></script> 
+  <script type="module" src="scripts/Card.js"></script> 
+  </body> 
 </html>

@@ -27,7 +27,7 @@ const cardImage = document.querySelector(".card__image");
 
 // рендеринг карточки из массива
 
-function createPlacesDomNode(item) {
+ function createPlacesDomNode(item) {
   const placeCardTemplate = placeCard.querySelector(".card").cloneNode(true);
   placeCardTemplate.querySelector(".card__place-name").textContent = item.name;
   placeCardTemplate.querySelector(".card__image").src = item.link;
@@ -42,7 +42,7 @@ function createPlacesDomNode(item) {
   placeCardTemplate.querySelector(".card__like-button").addEventListener("click", function (evt) {
     const likeTarget = evt.target;
     likeTarget.classList.toggle("card__like-button_active");
-  });
+  }); 
 
   // открытие на весь экран
   function showPicture() {
@@ -61,15 +61,15 @@ function createPlacesDomNode(item) {
   });
 
   return placeCardTemplate;
-}
+} 
 
 // применение ко всему массиву
 
-const result = initialCards.map((item) => {
+/* const result = initialCards.map((item) => {
   return createPlacesDomNode(item);
 });
 
-places.append(...result);
+places.append(...result); */
 
 //удаление на esc
 
@@ -79,14 +79,6 @@ function closePopupByEsc(e) {
     closePopup(openedPopup);
   }
 };
-
-/*  function closePopupByClick(e) {
-  if (e.target.closest(".popup__container")) {
-  } else {
-    closePopup(openedPopup);
-  }
-};  
-  */
 
 // функция открытия модального окна
 
@@ -197,5 +189,22 @@ pictureShow.addEventListener('click', function (e) {
 });
 
 
+/* import { FormValidator } from "./FormValidator.js"; */
 
+const formContainers = document.querySelectorAll('.popup__container');
+
+formContainers.forEach((formContainer) => {
+  const formValidator = new FormValidator(
+    {
+      formSelector: ".popup__container",
+      inputSelector: ".popup__input",
+      submitButtonSelector: ".popup__button-submit",
+      inactiveButtonClass: ".popup__button-submit_disabled",
+      inputErrorClass: ".popup__input_has-error"
+    },
+    formContainer
+  );
+  formContainer.formValidator = formValidator;
+  formContainer.formValidator.enableValidation();
+});
 
