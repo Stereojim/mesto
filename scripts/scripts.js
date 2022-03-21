@@ -1,7 +1,5 @@
-import { isEscEvent, handleEscUp, openModalWindow, imageModalWindow, imageElement, imageCaption} from './utils.js';
 import { FormValidator } from "./FormValidator.js";
-import { Card } from './Card.js'
-/* import { Card } from './Card3.js'; */
+import { Card } from './Card.js';
 
  
 const initialCards = [
