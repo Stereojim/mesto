@@ -31,7 +31,6 @@ const initialCards = [
 
 
 const editButton = document.querySelector(".profile__edit-button");
-const placesWrap = document.querySelector('.card-list__items');
 const person = document.querySelector(".profile__name");
 const profession = document.querySelector(".profile__profession");
 const nameInput = document.querySelector(".popup__input_type_author");
@@ -84,7 +83,7 @@ initialCards.forEach((data) => {
   const card = new Card(data, ".square-card");
   const cardElement = card.generateCard();
 
-  document.querySelector(".card-list__items").append(cardElement);
+  document.querySelector(".elements").append(cardElement);
 });
  
 
