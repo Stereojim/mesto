@@ -1,55 +1,17 @@
-export const items = [
-  {
-    title: "Архыз",
-    image:
-      "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    title: "Челябинская область",
-    image:
-      "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    title: "Иваново",
-    image:
-      "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    title: "Камчатка",
-    image:
-      "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    title: "Холмогорский район",
-    image:
-      "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    title: "Байкал",
-    image:
-      "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-];
-
 const cardElement = document.querySelector(".popup_type_picture-open");
-/* const cardImage = document.querySelector('.card__image'); */
-const cardCloseButton = document.querySelector(
-  ".popup__button-close_type_picture-open"
-);
+/* const cardImage = document.querySelector('.card__image');  */
+/* const cardCloseButton = document.querySelector(".popup__button-close_type_picture-open"); */
 
 export class Card {
   constructor(data, cardSelector) {
-    this._title = data.title;
-    this._description = data.title;
-    this._image = data.image;
+    this._title = data.name;
+    this._description = data.name;
+    this._image = data.link;
     this._cardSelector = cardSelector;
   }
 
   _getTemplate() {
-    const cardElement = document
-      .querySelector(this._cardSelector)
-      .content.querySelector(".card")
-      .cloneNode(true);
+    const cardElement = document.querySelector(this._cardSelector).content.querySelector(".card").cloneNode(true);
 
     return cardElement;
   }
@@ -82,9 +44,9 @@ export class Card {
       .addEventListener("click", (evt) => {
         this._handleLikeCard(evt);
       });
-    /*   cardCloseButton.addEventListener('click', () => {
+/*     cardCloseButton.addEventListener('click', () => {
       this._handleCloseCard()
-    }); */
+    });  */
   }
 
   _handleOpenCard() {
@@ -95,7 +57,7 @@ export class Card {
     caption.textContent = this._title;
     cardElement.classList.add("popup_opened");
   }
-     _handleCloseCard() {
+    _handleCloseCard() {
       this.removeEventListener('keydown', closePopupByEsc);
       popup.classList.remove("popup_opened");
     }  
@@ -111,12 +73,4 @@ export class Card {
   }
   
 }
-
-items.forEach((item) => {
-  const card = new Card(item, ".square-card");
-  const cardElement = card.generateCard();
-
-  // Добавляем в DOM
-  document.querySelector(".card-list__items").append(cardElement);
-});
 
