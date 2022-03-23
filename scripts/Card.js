@@ -1,9 +1,4 @@
-import {modalImg, caption, openPopup} from './Index.js' // этот вариант не пройдет в ПР8?
-
-
-const cardElement = document.querySelector(".popup_type_picture-open");
-/* const cardImage = document.querySelector('.card__image');  */
-/* const cardCloseButton = document.querySelector(".popup__button-close_type_picture-open"); */
+import {modalImg, caption, openPopup, cardElement} from './Index.js' // этот вариант не пройдет в ПР8?
 
 export class Card {
   constructor(data, cardSelector) {
