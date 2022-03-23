@@ -3,6 +3,8 @@
     opacity: 0.3;
     color: #000000;
     border: 1px solid #000000;
+    cursor: auto;
+
 }
 
 .popup__button-submit_disabled:hover {

@@ -29,35 +29,26 @@ const initialCards = [
   },
 ] 
 
-
-const editButton = document.querySelector(".profile__edit-button");
 const person = document.querySelector(".profile__name");
 const profession = document.querySelector(".profile__profession");
 const nameInput = document.querySelector(".popup__input_type_author");
 const professionInput = document.querySelector(".popup__input_type_profession");
-const placeCard = document.querySelector("#placeCard").content;
-const popup = document.querySelector(".popup");
-const popupContainer = document.querySelector(".popup__container");
 const profileForm = document.querySelector(".popup_type_profile-edit");
-const profileFormSumbitButton = profileForm.querySelector(".popup__button-submit");
 const placeForm = document.querySelector(".popup_type_create-place");
 const pictureShow = document.querySelector(".popup_type_picture-open");
-const editProfileButton = document.querySelector(".profile__edit-button");
-const addPlaceButton = document.querySelector(".profile__add-button");
-const closePopapButton = document.querySelectorAll(".popup__button-close");
-const closeProfileEdit = document.querySelector(".popup__button-close_type_profile-edit");
-const closePlaceForm = document.querySelector(".popup__button-close_type_create-place");
-const submitProfileButton = document.querySelector(".popup__button-submit_type_profile");
-const submitCardButton = document.querySelector(".popup__button-submit_type_card");
-const removeCardButton = document.querySelector(".card__remove-button");
-const cardLikeButton = document.querySelector(".card__like-button");
-const card = document.querySelector(".card");
-const cardImage = document.querySelector(".card__image");
+const profileEditButton = document.querySelector(".profile__edit-button");
+const placeAddButton = document.querySelector(".profile__add-button");
+const profileEditClose = document.querySelector(".popup__button-close_type_profile-edit");
+const placeFormClose = document.querySelector(".popup__button-close_type_create-place");
+const profileSubmitButton = document.querySelector(".popup__button-submit_type_profile");
+const cardSubmitButton = document.querySelector(".popup__button-submit_type_card");
 const places = document.querySelector(".elements");
-const addPlaceForm = document.querySelector(".popup__form_type_place");
+const placeFormAdd = document.querySelector(".popup__form_type_place");
 const profileEditForm = profileForm.querySelector(".popup__form_profile_edit");
 const inputPlaceName = document.querySelector(".popup__input_type_place-name");
 const inputPictureLink = document.querySelector(".popup__input_type_place-link");
+export const modalImg = document.querySelector(".popup__picture");
+export const caption = document.querySelector(".popup__picture-title");
 
 // конфиг класса валидации
 const validationConfig = {
@@ -70,7 +61,7 @@ const validationConfig = {
 };
 
 
-const addPlaceFormValidation = new FormValidator(validationConfig, addPlaceForm);
+const addPlaceFormValidation = new FormValidator(validationConfig, placeFormAdd);
 const profileEditFormValidation = new FormValidator(validationConfig, profileEditForm);
 
 // запуск валидации на обе формы
@@ -78,29 +69,36 @@ addPlaceFormValidation.enableValidation();
 profileEditFormValidation.enableValidation();
 
 
+ // создание шаблона карточки
+const renderCard = (data) => {
+  const card = new Card(data, '.square-card')
+  const cardElement = card.generateCard()
+  places.prepend(cardElement); // возвращает в DOM? тут надо убрать?
+}
+
 // добавление карточек массива
 initialCards.forEach((data) => {
-  const card = new Card(data, ".square-card");
+  renderCard(data)
+/*   const card = new Card(data, ".square-card");
   const cardElement = card.generateCard();
-
-  document.querySelector(".elements").append(cardElement);
+  document.querySelector(".elements").append(cardElement); // заменить на функцию */
 });
- 
 
 //удаление на esc
 function closePopupByEsc(e) {
   const openedPopup = document.querySelector(".popup_opened");
   if (e.key === "Escape") {
     closePopup(openedPopup);
+    formReset()
   }
 }
 
 
 // функция открытия модальных окон
-const openPopup = function (popup) {
-  popup.classList.add("popup_opened");
-  // слушатель функции закрытия на esc здесь же
+export const openPopup = function (popup) {
+    // слушатель функции закрытия на esc здесь же
   document.addEventListener("keydown", closePopupByEsc);
+  popup.classList.add("popup_opened");
 };
 
 
@@ -112,20 +110,20 @@ popup.classList.remove("popup_opened");
 
 
 // открытие формы редактирования профиля
-editProfileButton.addEventListener("click", () => {
+profileEditButton.addEventListener("click", () => {
   openPopup(profileForm);
   profileEditFormValidation.resetValidation(profileForm);
-  profileEditFormValidation.disableSubmitButton(submitProfileButton);
+  profileEditFormValidation.disableSubmitButton(profileSubmitButton);
   nameInput.value = person.textContent;
   professionInput.value = profession.textContent;
 });
 
 
 // открытиe формы создания карточки места
-addPlaceButton.addEventListener("click", () => {
+placeAddButton.addEventListener("click", () => {
   openPopup(placeForm);
   addPlaceFormValidation.resetValidation(placeForm);
-  addPlaceFormValidation.disableSubmitButton(submitCardButton);
+  addPlaceFormValidation.disableSubmitButton(cardSubmitButton);
 });
 
 
@@ -135,7 +133,6 @@ function saveNewProfile() {
   const newProfession = professionInput.value;
   person.textContent = newName;
   profession.textContent = newProfession;
-  console.log("name: ", nameInput.value);
   closePopup(profileForm);
 }
 
@@ -145,15 +142,11 @@ const placeFormSubmit = (evt) => {
   evt.preventDefault();
   renderCard({name: inputPlaceName.value, link: inputPictureLink.value});
     closePopup(placeForm);
+    formReset()
   };
 
 
-// создание шаблона карточки
-const renderCard = (data) => {
-  const card = new Card(data, '.square-card')
-  const cardElement = card.generateCard()
-  places.prepend(cardElement);
-}
+
 
 
 // слушатель кнопки сохранения карточки данных об авторе
@@ -168,13 +161,13 @@ placeForm.addEventListener("submit", placeFormSubmit);
 
 
 // закрытие формы редактирования профиля автора
-closeProfileEdit.addEventListener("click", () => {
+profileEditClose.addEventListener("click", () => {
   closePopup(profileForm);
 });
 
 
 // закрытие формы создания новой карточки места
-closePlaceForm.addEventListener("click", () => {
+placeFormClose.addEventListener("click", () => {
   closePopup(placeForm);
 });
 
@@ -191,6 +184,7 @@ placeForm.addEventListener("click", function (e) {
   if (e.target.closest(".popup__container")) {
   } else {
     closePopup(placeForm);
+    formReset()
   }
 });
 
@@ -200,4 +194,13 @@ pictureShow.addEventListener("click", function (e) {
     closePopup(pictureShow);
   }
 });
+
+function formReset() {
+  inputPictureLink.value = '';
+  inputPlaceName.value = '';
+}
+
+function createCard() {
+
+}
 
