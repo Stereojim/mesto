@@ -1,4 +1,4 @@
-import {modalImg, caption, openPopup, cardElement} from './Index.js' // этот вариант не пройдет в ПР8?
+import {modalImg, caption, openPopup, cardElement} from './Index.js' 
 
 export class Card {
   constructor(data, cardSelector) {
@@ -12,7 +12,7 @@ export class Card {
   }
 
   generateCard() {
-    this._cardElement = this._cardTemplate.cloneNode(true); //получилось две задачи в методе?
+    this._cardElement = this._cardTemplate.cloneNode(true); 
 
     this._likeButton = this._cardElement.querySelector(".card__like-button");
     this._deleteButton = this._cardElement.querySelector(".card__remove-button");
@@ -43,7 +43,7 @@ export class Card {
     modalImg.src = this._image;
     modalImg.alt = this._title;
     caption.textContent = this._title;
-    openPopup(cardElement); // вроде бы убрал дублирование функции
+    openPopup(cardElement); 
   }
 
   _handleDeleteCard() {

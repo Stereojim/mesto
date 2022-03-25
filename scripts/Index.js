@@ -161,10 +161,10 @@ profileEditForm.addEventListener("submit", function (evt) {
   saveNewProfile();
 });
 
-// слушатель действия по кнопке создания новой карточки места
+ // слушатель действия по кнопке создания новой карточки места
 placeForm.addEventListener("submit", placeFormSubmit);
 
-// закрытие формы редактирования профиля автора
+/* // закрытие формы редактирования профиля автора
 profileEditClose.addEventListener("click", () => {
   closePopup(profileForm);
 });
@@ -172,21 +172,24 @@ profileEditClose.addEventListener("click", () => {
 // закрытие формы создания новой карточки места
 placeFormClose.addEventListener("click", () => {
   closePopup(placeForm);
-});
+});  */
 
-// слушатели закрытия для каждой формы // не получилося. консоль говорит, что функция у меня не получилась(
-/* const popupList = document.querySelector("popup");
+// слушатели закрытия для каждой формы 
+
+const popupList = document.querySelectorAll(".popup"); //да, без ALL было забавно использовать forEach))
 
 popupList.forEach((popup) => {
   popup.addEventListener("click", (evt) => {
     if (
-      evt.target.classList.contains("popup") ||
+      evt.target.classList.contains("popup__form") || 
       evt.target.classList.contains("popup__button-close") 
     ) {
       closePopup(popup);
     }
   });
-}); */
+}); 
+
+// слушатели закрытия по клику на оверлей
 
 profileForm.addEventListener("click", function (e) {
   if (e.target.closest(".popup__container")) {
@@ -208,5 +211,5 @@ pictureShow.addEventListener("click", function (e) {
   } else {
     closePopup(pictureShow);
   }
-});
+}); 
  

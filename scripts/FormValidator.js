@@ -18,30 +18,30 @@ export class FormValidator {
     this._buttonElement.disabled = true;
   }
 
-  _enableSubmitButton(buttonElement) {
+  _enableSubmitButton() {
     this._buttonElement.classList.remove(this._settings.inactiveButtonClass);
     this._buttonElement.disabled = false;
   }
 
-  toggleButtonState(inputList, buttonElement) {
-    if (this._hasInvalidInput(inputList)) {
-      this._disableSubmitButton(buttonElement);
+  toggleButtonState() {
+    if (this._hasInvalidInput()) {
+      this._disableSubmitButton();
     } else {
-      this._enableSubmitButton(buttonElement);
+      this._enableSubmitButton();
     }
   }
 
   _showInputError(inputElement, errorMessage) {
     const errorElement = this._form.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.add(this._settings.inputErrorClass);
-    errorElement.textContent = errorMessage; //ошибка
+    errorElement.textContent = errorMessage; 
     errorElement.classList.add(this._settings.errorClass);
   }
 
   _hideInputError(inputElement) {
     const errorElement = this._form.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.remove(this._settings.inputErrorClass);
-    errorElement.classList.remove(this._settings.errorClass); //ошибка
+    errorElement.classList.remove(this._settings.errorClass); 
     errorElement.textContent = "";
   }
 
