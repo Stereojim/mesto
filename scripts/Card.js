@@ -1,7 +1,7 @@
 import {modalImg, caption, openPopup, cardElement} from './Index.js' 
 
 export class Card {
-  constructor(data, cardSelector) {
+  constructor(data, cardSelector, handleImageClick) {
     this._cardTemplate = document
       .querySelector(cardSelector)
       .content.querySelector(".card");
@@ -9,6 +9,7 @@ export class Card {
     this._description = data.name;
     this._image = data.link;
     this._cardSelector = cardSelector;
+    this._handleImageClick = handleImageClick
   }
 
   generateCard() {
@@ -28,9 +29,9 @@ export class Card {
   }
 
   _setEventListeners() {
-    this._cardImage.addEventListener("click", () => {
-        this._handleOpenCard();
-      });
+     this._cardImage.addEventListener("click", () => {
+        this._handleImageClick();
+      }); 
       this._deleteButton.addEventListener("click", (evt) => {
         this._handleDeleteCard(evt);
       });
@@ -38,13 +39,13 @@ export class Card {
         this._handleLikeCard(evt);
       });
   }
-
-  _handleOpenCard() {
+// обрабатывается через класс popupwithimage
+ /*  _handleOpenCard() {
     modalImg.src = this._image;
     modalImg.alt = this._title;
     caption.textContent = this._title;
     openPopup(cardElement); 
-  }
+  } */
 
   _handleDeleteCard() {
     this._cardElement.remove();

@@ -1,6 +1,7 @@
 import { FormValidator } from "./FormValidator.js";
 import { Card } from "./Card.js";
 import { Section } from './Section.js';
+import { PopupWithImage } from "./PopupWithImage.js";
 
 const initialCards = [
   {
@@ -87,7 +88,9 @@ profileEditFormValidation.enableValidation();
 
 // создание шаблона карточки
 function createCard(data) {
-  const card = new Card(data, ".square-card");
+  const card = new Card(data, ".square-card", () => {
+    imagePopup.open(data.name, data.link)
+  });
   return card.generateCard();
 }
 
@@ -213,12 +216,17 @@ placeForm.addEventListener("click", function (e) {
   }
 });
 
-pictureShow.addEventListener("click", function (e) {
+/* pictureShow.addEventListener("click", function (e) {
   if (e.target.closest(".popup__container")) {
   } else {
     closePopup(pictureShow);
   }
-}); 
+});  */
  
 const section = new Section({ items: initialCards, renderer:renderCard }, '.elements')
+
+
+const imagePopup = new PopupWithImage('.popup_type_picture-open')
+imagePopup.setEventListeners()
+
 section.renderItems()
