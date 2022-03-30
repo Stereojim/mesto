@@ -1,5 +1,6 @@
 import { FormValidator } from "./FormValidator.js";
 import { Card } from "./Card.js";
+import { Section } from './Section.js';
 
 const initialCards = [
   {
@@ -97,9 +98,9 @@ const renderCard = (data) => {
 };
 
 // добавление карточек массива
-initialCards.forEach((data) => {
+/* initialCards.forEach((data) => {
   renderCard(data);
-});
+}); */
 
 //удаление на esc
 function closePopupByEsc(e) {
@@ -150,10 +151,16 @@ function saveNewProfile() {
 // сохранение новой карточки места
 const placeFormSubmit = (evt) => {
   evt.preventDefault();
-  renderCard({ name: inputPlaceName.value, link: inputPictureLink.value });
-  closePopup(placeForm);
-  newPlaceForm.reset(); // так реально удобнее!
+const card = createCard({
+   name: inputPlaceName.value, 
+   link: inputPictureLink.value 
+  })
+section.addItem(card);
+closePopup(placeForm);
+newPlaceForm.reset();
 };
+
+
 
 // слушатель кнопки сохранения карточки данных об авторе
 profileEditForm.addEventListener("submit", function (evt) {
@@ -213,3 +220,5 @@ pictureShow.addEventListener("click", function (e) {
   }
 }); 
  
+const section = new Section({ items: initialCards, renderer:renderCard }, '.elements')
+section.renderItems()
