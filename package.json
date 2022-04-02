@@ -1,0 +1,32 @@
+{
+  "name": "mesto",
+  "version": "0.0.1",
+  "description": "Learning platform",
+  "main": "index.js",
+  "scripts": {
+    "build": "rd /s /q dist && webpack",
+    "dev": "webpack serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Stereojim/mesto.git"
+  },
+  "author": "Egor Bezdenezhnykh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Stereojim/mesto/issues"
+  },
+  "homepage": "https://github.com/Stereojim/mesto#readme",
+  "dependencies": {
+    "core-js": "^3.21.1",
+    "save-dev": "^0.0.1-security",
+    "webpack": "^5.71.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.8",
+    "@babel/preset-env": "^7.16.11",
+    "babel-loader": "^8.2.4",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4"
+  }
+}
