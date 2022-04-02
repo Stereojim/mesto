@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>mesto</title>
-    <base target="_blank" />
-    <link rel="stylesheet" href="pages/index.css" />
+    <base target="_blank" /><!-- 
+    <link rel="stylesheet" href="pages/index.css" /> -->
   </head>
 
   <body class="body">
@@ -14,7 +14,8 @@
       <header class="header">
         <img
           class="header__logo"
-          src="images/Logo-header.svg"
+          src="<%=require('./images/Logo-header.svg')%>"
+          
           alt="логотип место"
         />
       </header>
@@ -23,7 +24,7 @@
         <div class="profile">
           <img
             class="profile__avatar"
-            src="images/avatar.jpg"
+            src="<%=require('./images/avatar.jpg')%>"
             alt="фото автора"
           />
           <div class="profile__info">
