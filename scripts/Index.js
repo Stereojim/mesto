@@ -2,6 +2,9 @@ import { FormValidator } from "./FormValidator.js";
 import { Card } from "./Card.js";
 import { Section } from './Section.js';
 import { PopupWithImage } from "./PopupWithImage.js";
+import { PopupWithForm } from "./PopupWithForm.js";
+import { UserInfo } from "./UserInfo.js";
+
 
 const initialCards = [
   {
@@ -73,18 +76,14 @@ const validationConfig = {
   errorClass: "popup__error_visible",
 };
 
-const addPlaceFormValidation = new FormValidator(
-  validationConfig,
-  placeFormAdd
-);
-const profileEditFormValidation = new FormValidator(
-  validationConfig,
-  profileEditForm
-);
+// создание класса валидации и запуск
+const addPlaceFormValidation = new FormValidator(validationConfig, placeFormAdd);
+const profileEditFormValidation = new FormValidator(validationConfig, profileEditForm);
 
-// запуск валидации на обе формы
 addPlaceFormValidation.enableValidation();
 profileEditFormValidation.enableValidation();
+
+
 
 // создание шаблона карточки
 function createCard(data) {
@@ -101,80 +100,81 @@ const renderCard = (data) => {
 };
 
 // добавление карточек массива
-/* initialCards.forEach((data) => {
+ initialCards.forEach((data) => {
   renderCard(data);
-}); */
+}); 
+
 
 //удаление на esc
-function closePopupByEsc(e) {
+/* function closePopupByEsc(e) {
   if (e.key === "Escape") {
     const openedPopup = document.querySelector(".popup_opened");
     closePopup(openedPopup);
   }
-}
+} */
 
 // функция открытия модальных окон
 export const openPopup = function (popup) {
   // слушатель функции закрытия на esc здесь же
-  document.addEventListener("keydown", closePopupByEsc);
+  /* document.addEventListener("keydown", closePopupByEsc); */
   popup.classList.add("popup_opened");
-};
+}; 
 
-// функция закрытия модального окон
+ // функция закрытия модального окон
 const closePopup = function (popup) {
-  document.removeEventListener("keydown", closePopupByEsc);
+  /* document.removeEventListener("keydown", closePopupByEsc); */
   popup.classList.remove("popup_opened");
-};
+}; 
 
 // открытие формы редактирования профиля
 profileEditButton.addEventListener("click", () => {
+  const { name, job } = userInfo.getUserInfo()
   profileEditFormValidation.resetValidation(profileForm);
   profileEditFormValidation.toggleButtonState(profileSubmitButton);
-  nameInput.value = person.textContent;
-  professionInput.value = profession.textContent;
-
-  openPopup(profileForm);
+  nameInput.value = name;
+  professionInput.value = job;
+editProfilePopup.open()
+ 
 });
 
 // открытиe формы создания карточки места
 placeAddButton.addEventListener("click", () => {
   addPlaceFormValidation.resetValidation(placeForm);
   addPlaceFormValidation.toggleButtonState(cardSubmitButton);
-
-  openPopup(placeForm);
+  addCardPopup.open()
 });
 
 // сохранение новой формы данных об авторе
-function saveNewProfile() {
-  person.textContent = nameInput.value;
-  profession.textContent = professionInput.value;
-  closePopup(profileForm);
+const saveNewProfile = (data) => {
+  const {name, description} = data
+  userInfo.setUserInfo(name, description)
+  editProfilePopup.close()
 }
 
 // сохранение новой карточки места
-const placeFormSubmit = (evt) => {
-  evt.preventDefault();
+const placeFormSubmit = (data) => {
+
 const card = createCard({
-   name: inputPlaceName.value, 
-   link: inputPictureLink.value 
-  })
+  name: data['place-name-input'],
+  link: data['place-link-input']
+})
 section.addItem(card);
-closePopup(placeForm);
-newPlaceForm.reset();
+
+addCardPopup.close();
 };
 
 
-
+/* 
 // слушатель кнопки сохранения карточки данных об авторе
-profileEditForm.addEventListener("submit", function (evt) {
+ profileEditForm.addEventListener("submit", function (evt) {
   evt.preventDefault();
   saveNewProfile();
-});
+}); 
 
  // слушатель действия по кнопке создания новой карточки места
-placeForm.addEventListener("submit", placeFormSubmit);
+placeForm.addEventListener("submit", placeFormSubmit); 
 
-/* // закрытие формы редактирования профиля автора
+// закрытие формы редактирования профиля автора
 profileEditClose.addEventListener("click", () => {
   closePopup(profileForm);
 });
@@ -182,11 +182,11 @@ profileEditClose.addEventListener("click", () => {
 // закрытие формы создания новой карточки места
 placeFormClose.addEventListener("click", () => {
   closePopup(placeForm);
-});  */
+});  */ 
 
 // слушатели закрытия для каждой формы 
 
-const popupList = document.querySelectorAll(".popup"); //да, без ALL было забавно использовать forEach))
+/*  const popupList = document.querySelectorAll(".popup"); //да, без ALL было забавно использовать forEach))
 
 popupList.forEach((popup) => {
   popup.addEventListener("click", (evt) => {
@@ -197,11 +197,11 @@ popupList.forEach((popup) => {
       closePopup(popup);
     }
   });
-}); 
+});   */
 
 // слушатели закрытия по клику на оверлей
 
-profileForm.addEventListener("click", function (e) {
+/*   profileForm.addEventListener("click", function (e) {
   if (e.target.closest(".popup__container")) {
   } else {
     closePopup(profileForm);
@@ -214,19 +214,26 @@ placeForm.addEventListener("click", function (e) {
     closePopup(placeForm);
 
   }
-});
+});  */
 
-/* pictureShow.addEventListener("click", function (e) {
-  if (e.target.closest(".popup__container")) {
+/*   pictureShow.addEventListener("click", function (e) {
+  if (e.target.closest(".popup__form")) {
   } else {
     closePopup(pictureShow);
   }
-});  */
+});   */ 
  
 const section = new Section({ items: initialCards, renderer:renderCard }, '.elements')
 
+const imagePopup = new PopupWithImage('.popup_type_picture-open');
 
-const imagePopup = new PopupWithImage('.popup_type_picture-open')
+const addCardPopup = new PopupWithForm('.popup_type_create-place', placeFormSubmit);
+const editProfilePopup = new PopupWithForm('.popup_type_profile-edit', saveNewProfile);
+
 imagePopup.setEventListeners()
+addCardPopup.setEventListeners()
+editProfilePopup.setEventListeners()  
 
 section.renderItems()
+
+const userInfo = new UserInfo({ profileNameSelector: '.profile__name', proileJobSelector: '.profile__profession' })

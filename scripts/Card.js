@@ -39,13 +39,6 @@ export class Card {
         this._handleLikeCard(evt);
       });
   }
-// обрабатывается через класс popupwithimage
- /*  _handleOpenCard() {
-    modalImg.src = this._image;
-    modalImg.alt = this._title;
-    caption.textContent = this._title;
-    openPopup(cardElement); 
-  } */
 
   _handleDeleteCard() {
     this._cardElement.remove();

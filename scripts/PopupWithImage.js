@@ -12,8 +12,3 @@ export class PopupWithImage extends Popup {
     super.open()
   }
 }
-
-/* const popup = new PopupWithImage('.popup_type_picture-open')
-
-popup.open()
-popup.close() */

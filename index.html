@@ -55,12 +55,12 @@
               <h3 class="popup__title">Редактировать профиль</h3>
 
                 <label class="popup__label">
-                <input class="popup__input popup__input_type_author" id="author-input" name="author-input" type="text" minlength="2" maxlength="30" required placeholder="Имя" />
+                <input class="popup__input popup__input_type_author" id="author-input" name="name" type="text" minlength="2" maxlength="30" required placeholder="Имя" />
                 <span id="author-input-error" class="popup__error"></span>
                 </label>
 
                 <label class="popup__label">
-                <input class="popup__input popup__input_type_profession" name="profession-input" id="profession-input" type="text" minlength="2" maxlength="200" required placeholder="Профессия" />
+                <input class="popup__input popup__input_type_profession" name="description" id="profession-input" type="text" minlength="2" maxlength="200" required placeholder="Профессия" />
                 <span id="profession-input-error" class="popup__error"></span>
                 </label>
               <button class="popup__button-submit popup__button-submit_type_profile" type="submit" id="submit" value="Cохранить">Сохранить</button>
@@ -92,6 +92,7 @@
         </div>
 
         <div class="popup popup_type_picture-open">
+          
           <figure class="popup__figure">
             <button
               class="popup__button-close popup__button-close_type_picture-open"
