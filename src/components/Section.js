@@ -8,7 +8,7 @@ this._renderer = renderer
 // изначальная отрисовка
 renderItems() {
 this._items.forEach(data => {
-this._renderer(data, this._container)
+this._renderer(data)
 })
 }
 

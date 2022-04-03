@@ -1,3 +1,6 @@
+/* спасибо за комментарии! только по описанию работы так и не понял как надо сдать-
+убрать часть вебпака, убрать ссылку на стили из html? как тогда проверять...Тут оставил стили, но не менял пути для логотипов */
+
 import { FormValidator } from "./components/FormValidator.js";
 import { Card } from "./components/Card.js";
 import { Section } from './components/Section.js';
@@ -47,10 +50,6 @@ const places = document.querySelector(".elements");
 const placeFormAdd = document.querySelector(".popup__form_type_place");
 const profileEditForm = profileForm.querySelector(".popup__form_profile_edit");
 
-export const modalImg = document.querySelector(".popup__picture");
-export const caption = document.querySelector(".popup__picture-title");
-export const cardElement = document.querySelector(".popup_type_picture-open");
-
 
 // конфиг класса валидации
 const validationConfig = {
@@ -79,23 +78,22 @@ function createCard(data) {
   return card.generateCard();
 }
 
-
-// вставка карточки
-const renderCard = (data) => {
-  const cardElement = createCard(data);
-  places.prepend(cardElement);
-};
-
+/* запутался тут что что вставляет. это должна быть функция отрисовки всех
+карточек по шаблону */
+const renderCard = (data) => { 
+  const cardElement = createCard(data); 
+  section.addItem(cardElement);  
+};  
 
 // открытие формы редактирования профиля
 profileEditButton.addEventListener("click", () => {
   const { name, job } = userInfo.getUserInfo()
   
-  profileEditFormValidation.resetValidation(profileForm);
-  profileEditFormValidation.toggleButtonState(profileSubmitButton);
-
   nameInput.value = name;
   professionInput.value = job;
+
+  profileEditFormValidation.resetValidation(profileForm);
+  profileEditFormValidation.toggleButtonState(profileSubmitButton);
 
   editProfilePopup.open()
 });
@@ -126,19 +124,21 @@ const card = createCard({
   link: data['place-link-input']
 })
 section.addItem(card);
-
 addCardPopup.close();
 };
  
+
 const section = new Section({ items: initialCards, renderer:renderCard }, '.elements')
 const imagePopup = new PopupWithImage('.popup_type_picture-open');
 const addCardPopup = new PopupWithForm('.popup_type_create-place', placeFormSubmit);
 const editProfilePopup = new PopupWithForm('.popup_type_profile-edit', saveNewProfile);
 const userInfo = new UserInfo({ profileNameSelector: '.profile__name', proileJobSelector: '.profile__profession' })
 
+
 imagePopup.setEventListeners()
 addCardPopup.setEventListeners()
 editProfilePopup.setEventListeners()  
+
 
 section.renderItems()
 

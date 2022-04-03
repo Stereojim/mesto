@@ -25,8 +25,9 @@ _handleEscClose(evt) {
 
 setEventListeners() {
 const closeButton = this._popup.querySelector('.popup__button-close')
-this._popup.addEventListener('click', (e) => {
-  if ( !e.target.closest('.popup__container') ||  e.target === closeButton) {
+this._popup.addEventListener('click', (evt) => {
+  if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__button-close')) 
+  {
     this.close()
     }
    })
