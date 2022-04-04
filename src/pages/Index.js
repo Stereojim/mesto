@@ -5,7 +5,6 @@ import { PopupWithImage } from "../components/PopupWithImage.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import { UserInfo } from "../components/UserInfo.js";
 
-
 const initialCards = [
   {
     name: "Архыз",
@@ -46,10 +45,6 @@ const places = document.querySelector(".elements");
 const placeFormAdd = document.querySelector(".popup__form_type_place");
 const profileEditForm = profileForm.querySelector(".popup__form_profile_edit");
 
-export const modalImg = document.querySelector(".popup__picture");
-export const caption = document.querySelector(".popup__picture-title");
-export const cardElement = document.querySelector(".popup_type_picture-open");
-
 
 // конфиг класса валидации
 const validationConfig = {
@@ -82,17 +77,17 @@ function createCard(data) {
 // вставка карточки
 const renderCard = (data) => {
   const cardElement = createCard(data);
-  places.prepend(cardElement);
+  section.addItem(cardElement);
 };
 
 
 // открытие формы редактирования профиля
 profileEditButton.addEventListener("click", () => {
-  const { name, job } = userInfo.getUserInfo()
-  
+
   profileEditFormValidation.resetValidation(profileForm);
   profileEditFormValidation.toggleButtonState(profileSubmitButton);
 
+  const { name, job } = userInfo.getUserInfo()
   nameInput.value = name;
   professionInput.value = job;
 
