@@ -46,7 +46,6 @@ const profileEditButton = document.querySelector(".profile__edit-button");
 const placeAddButton = document.querySelector(".profile__add-button");
 const profileSubmitButton = document.querySelector(".popup__button-submit_type_profile");
 const cardSubmitButton = document.querySelector(".popup__button-submit_type_card");
-const places = document.querySelector(".elements");
 const placeFormAdd = document.querySelector(".popup__form_type_place");
 const profileEditForm = profileForm.querySelector(".popup__form_profile_edit");
 
