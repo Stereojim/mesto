@@ -2,7 +2,7 @@
   "name": "mesto",
   "version": "0.0.1",
   "description": "Learning platform",
-  "main": "./src/index.js",
+  "main": "index.js",
   "scripts": {
     "build": "webpack --mode production",
     "dev": "webpack serve",
@@ -21,6 +21,7 @@
   "homepage": "https://github.com/Stereojim/mesto#readme",
   "dependencies": {
     "core-js": "^3.21.1",
+    "jshint": "^2.13.4",
     "save-dev": "^0.0.1-security",
     "webpack": "^5.71.0"
   },
