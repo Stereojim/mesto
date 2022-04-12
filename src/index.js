@@ -7,7 +7,25 @@ import { UserInfo } from "./components/UserInfo.js";
 import './pages/index.css';
 import { api } from "./components/Api.js";
 
-api.getProfile(); 
+api.getProfile()
+.then(res => {
+  userInfo.setUserInfo(res.name, res.about)
+})
+
+api.getInitialCards()
+.then(cardList => {
+  console.log('cardList', cardList)
+  cardList.forEach(data => {
+    const card = createCard({
+      name: data.name,
+      link: data.link,
+      likes: data.likes
+    })
+    section.addItem(card)
+  })
+})
+
+
 
 const initialCards = [
   {
@@ -76,8 +94,7 @@ function createCard(data) {
   return card.generateCard();
 }
 
-/* запутался тут что что вставляет. это должна быть функция отрисовки всех
-карточек по шаблону */
+
 const renderCard = (data) => { 
   const cardElement = createCard(data); 
   section.addItem(cardElement);  
@@ -108,25 +125,34 @@ placeAddButton.addEventListener("click", () => {
 
 // сохранение новой формы данных об авторе
 const saveNewProfile = (data) => {
-  const {name, description} = data
-  userInfo.setUserInfo(name, description)
+  const { name, description } = data
 
-  editProfilePopup.close()
+  api.editProfile(name, description)
+  .then(() => {
+    userInfo.setUserInfo(name, description)
+    editProfilePopup.close()
+  })
 };
 
 
 // сохранение новой карточки места
 const placeFormSubmit = (data) => {
-const card = createCard({
-  name: data['place-name-input'],
-  link: data['place-link-input']
+
+api.addCard(data['place-name-input'], data['place-link-input'])
+.then(res => {
+  console.log('res', res)
+  const card = createCard({
+    name: res.name,
+    link: res.link,
+    likes: res.likes
+  })
+  section.addItem(card);
+  addCardPopup.close();
 })
-section.addItem(card);
-addCardPopup.close();
 };
  
 
-const section = new Section({ items: initialCards, renderer:renderCard }, '.elements')
+const section = new Section({ items: [], renderer:renderCard }, '.elements')
 const imagePopup = new PopupWithImage('.popup_type_picture-open');
 const addCardPopup = new PopupWithForm('.popup_type_create-place', placeFormSubmit);
 const editProfilePopup = new PopupWithForm('.popup_type_profile-edit', saveNewProfile);

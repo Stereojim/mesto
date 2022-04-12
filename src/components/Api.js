@@ -4,24 +4,53 @@ class Api {
     this._baseUrl = baseUrl;
   }
 
+
   getProfile() {
-    console.log('getProfile')
-    fetch('https://nomoreparties.co/v1/cohort-39/users/me', {
+    return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers
-    }).then(res => {
-      console.log('res', res)
-  })
-}
+    }).then(res => res.ok ? res.json() : Promise.reject(res.status))
+    .catch(console.log)
+  }
 
 
   getInitialCards() {
-    // ...
+    return fetch(`${this._baseUrl}/cards`, {
+      headers: this._headers
+    }).then(res => res.ok ? res.json() : Promise.reject(res.status))
+    .catch(console.log)
+  }
+
+
+  editProfile(name, about) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        name,
+        about
+      })
+    }).then(res => res.ok ? res.json() : Promise.reject(res.status))
+    .catch(console.log)
+  }
+
+
+  addCard(name, link) {
+    return fetch(`${this._baseUrl}/cards`, {
+      method: "POST",
+      headers: this._headers,
+      body: JSON.stringify({
+        name,
+        link
+      })
+    }).then(res => res.ok ? res.json() : Promise.reject(res.status))
+    .catch(console.log)
   }
 
   // другие методы работы с API
 }
 
-const api = new Api({
+
+export const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-39',
   headers: {
     authorization: 'f2ec7423-3d33-4d4c-8f08-a96b34cddef8',

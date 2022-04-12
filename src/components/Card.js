@@ -7,8 +7,16 @@ export class Card {
     this._description = data.name;
     this._image = data.link;
     this._cardSelector = cardSelector;
-    this._handleImageClick = handleImageClick
+    this._handleImageClick = handleImageClick;
+    this._likes = data.likes
   }
+
+
+_setLikes() {
+  const likeCountElement = this._cardElement.querySelector('.card__like-count')
+  likeCountElement.textContent = this._likes.length
+}
+
 
   generateCard() {
     this._cardElement = this._cardTemplate.cloneNode(true); 
@@ -22,6 +30,8 @@ export class Card {
     this._cardImage.alt = this._title;
 
     this._setEventListeners();
+
+    this._setLikes()
 
     return this._cardElement;
   }

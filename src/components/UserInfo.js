@@ -15,7 +15,4 @@ setUserInfo(title, job) {
   this._nameElement.textContent = title
   this._jobElement.textContent = job
 }
-
 }
-
-/* new UserInfo({ profileNameSelector: '.profile__name', proileJobSelector: '.profile__profession' }) */
