@@ -19,13 +19,16 @@
         />
       </header>
 
+
       <main class="content">
         <div class="profile">
+          <div class="profile__author">
           <img
             class="profile__avatar"
-            src="<%=require('./images/avatar.jpg')%>"
+            src=""
             alt="фото автора"
           />
+        </div>
           <div class="profile__info">
             <div class="profile__rename">
               <h1 class="profile__name"></h1>
@@ -97,6 +100,20 @@
               <button class="popup__button-close popup__button-close_type_create-place" aria-label="закрыть" type="button"></button>
               <h3 class="popup__title popup__title_card-remove">Вы уверены?</h3>
               <button class="popup__button-accept-remove" type="submit" value="Создать">Да</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="popup popup_type_change-avatar">
+          <div class="popup__container">
+            <form id="formPlace" class="popup__form" name="addPlaceForm" novalidate>
+              <button class="popup__button-close" aria-label="закрыть" type="button"></button>
+              <h3 class="popup__title ">Обновить аватар</h3>
+              <label class="popup__label">
+                <input class="popup__input popup__input_type_link" name="place-name-input" id="place-name-input" type="url" required placeholder="Ссылка на картинку" />
+                <span class="popup__error" id="place-name-input-error"></span>
+              </label>
+              <button class="popup__button-submit" type="submit" value="Создать">Сохранить</button>
             </form>
           </div>
         </div>

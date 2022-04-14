@@ -11,8 +11,9 @@ let userId
 
 api.getProfile()
 .then(res => {
-  userInfo.setUserInfo(res.name, res.about)
+  userInfo.setUserInfo(res.name, res.about, res.avatar)
   userId = res._id
+  console.log('avatar', res)
 })
 
 api.getInitialCards()
@@ -33,7 +34,7 @@ api.getInitialCards()
 
 
 
-const initialCards = [
+/* const initialCards = [
   {
     name: "Архыз",
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
@@ -58,11 +59,12 @@ const initialCards = [
     name: "Байкал",
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
   },
-];
+]; */
 
 
 const nameInput = document.querySelector(".popup__input_type_author");
 const professionInput = document.querySelector(".popup__input_type_profession");
+const avatarLinkInput = document.querySelector('.popup__input_type_link');
 const profileForm = document.querySelector(".popup_type_profile-edit");
 const placeForm = document.querySelector(".popup_type_create-place");
 const profileEditButton = document.querySelector(".profile__edit-button");
@@ -71,6 +73,8 @@ const profileSubmitButton = document.querySelector(".popup__button-submit_type_p
 const cardSubmitButton = document.querySelector(".popup__button-submit_type_card");
 const placeFormAdd = document.querySelector(".popup__form_type_place");
 const profileEditForm = profileForm.querySelector(".popup__form_profile_edit");
+const avatarImage = document.querySelector('.profile__avatar');
+
 
 
 // конфиг класса валидации
@@ -97,7 +101,7 @@ const createCard = (data) => {
   const card = new Card(
     data,
      ".square-card", () => {
-    imagePopup.open(data.name, data.link)
+    imagePopup.open(data.name, data.link, data.avatar)
   },
   (id) => {
     confirmPopup.open()
@@ -137,16 +141,38 @@ const renderCard = (data) => {
 
 // открытие формы редактирования профиля
 profileEditButton.addEventListener("click", () => {
-  const { name, job } = userInfo.getUserInfo()
+  const { name, job} = userInfo.getUserInfo()
   
   nameInput.value = name;
   professionInput.value = job;
+
 
   profileEditFormValidation.resetValidation(profileForm);
   profileEditFormValidation.toggleButtonState(profileSubmitButton);
 
   editProfilePopup.open()
 });
+
+
+// открытие формы редактирования аватара
+avatarImage.addEventListener('click', () => {
+/*   const { avatar } = userInfo.getUserInfo()
+  avatarLinkInput.value = avatar */
+
+  changeAvatarImage.open()
+})
+
+
+// сохранение нового аватара
+const saveNewAvatar = () => {
+   const avatar = avatarLinkInput.value
+  api.editProfileImage(avatar)
+  .then(res => {
+userInfo.setUserInfo(res.name, res.about, res.avatar)  
+  console.log('avatar', avatar)
+    changeAvatarImage.close()
+  })
+}
 
 
 // открытиe формы создания карточки места
@@ -163,8 +189,8 @@ const saveNewProfile = (data) => {
   const { name, description } = data
 
   api.editProfile(name, description)
-  .then(() => {
-    userInfo.setUserInfo(name, description)
+  .then(res => {
+    userInfo.setUserInfo(name, description, res.avatar)
     editProfilePopup.close()
   })
 };
@@ -194,16 +220,16 @@ const section = new Section({ items: [], renderer:renderCard }, '.elements')
 const imagePopup = new PopupWithImage('.popup_type_picture-open');
 const addCardPopup = new PopupWithForm('.popup_type_create-place', placeFormSubmit);
 const editProfilePopup = new PopupWithForm('.popup_type_profile-edit', saveNewProfile);
-const userInfo = new UserInfo({ profileNameSelector: '.profile__name', proileJobSelector: '.profile__profession' })
+const userInfo = new UserInfo({ profileNameSelector: '.profile__name', proileJobSelector: '.profile__profession', profileAvatarSelector: '.profile__avatar'})
 const confirmPopup = new PopupWithForm('.popup_type_delete-card');
+const changeAvatarImage = new PopupWithForm('.popup_type_change-avatar', saveNewAvatar);
   
-
-
 
 imagePopup.setEventListeners()
 addCardPopup.setEventListeners()
 editProfilePopup.setEventListeners()  
 confirmPopup.setEventListeners()
+changeAvatarImage.setEventListeners()
 
 
 section.renderItems()
