@@ -1,4 +1,10 @@
 .profile__avatar {
   border-radius: 50%;
   max-width: 120px;
+  z-index: 0;
+}
+
+.profile__avatar:hover {
+cursor: pointer;
+background: url(https://i.ibb.co/dPF50xZ/photo-2022-04-09-23-08-26.jpg);
 }

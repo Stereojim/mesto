@@ -93,23 +93,37 @@ profileEditFormValidation.enableValidation();
 
 
 // создание шаблона карточки
-function createCard(data) {
-  const card = new Card(data, ".square-card", () => {
+const createCard = (data) => {
+  const card = new Card(
+    data,
+     ".square-card", () => {
     imagePopup.open(data.name, data.link)
   },
   (id) => {
-    console.log('id', id)
     confirmPopup.open()
     confirmPopup.changeSubmitHandler(() => {
       api.deleteCard(id)
         .then(res => {
-       card.deleteCard()
-        confirmPopup.close()
-
-        console.log(res)
+          card.deleteCard()
+          confirmPopup.close()
       })
     }) 
-  }
+  },
+  (id) => {
+if(card.isLiked()) {
+  api.deleteLike(id)
+    .then(res => {
+      console.log(res)
+      card.setLikes(res.likes)
+    })
+} else {
+  api.addLike(id)
+  .then(res => {
+    console.log(res)
+    card.setLikes(res.likes)
+  })
+}
+  },
   );
   return card.generateCard();
 }
