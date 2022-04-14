@@ -17,10 +17,15 @@ this._inputs.forEach((input) => {
 return values;
 }
 
+changeSubmitHandler(newSubmitHandler) {
+  this._handleSubmit = newSubmitHandler
+}
+
 
 setEventListeners() {
 super.setEventListeners()
-this._form.addEventListener('submit', () => {
+this._form.addEventListener('submit', (e) => {
+  e.preventDefault()
   this._handleSubmit(this._getInputValues())
 })
 }

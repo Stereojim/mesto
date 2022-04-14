@@ -7,9 +7,12 @@ import { UserInfo } from "./components/UserInfo.js";
 import './pages/index.css';
 import { api } from "./components/Api.js";
 
+let userId
+
 api.getProfile()
 .then(res => {
   userInfo.setUserInfo(res.name, res.about)
+  userId = res._id
 })
 
 api.getInitialCards()
@@ -19,7 +22,10 @@ api.getInitialCards()
     const card = createCard({
       name: data.name,
       link: data.link,
-      likes: data.likes
+      likes: data.likes,
+      id: data._id,
+      userId: userId,
+      ownerId: data.owner._id
     })
     section.addItem(card)
   })
@@ -90,13 +96,28 @@ profileEditFormValidation.enableValidation();
 function createCard(data) {
   const card = new Card(data, ".square-card", () => {
     imagePopup.open(data.name, data.link)
-  });
+  },
+  (id) => {
+    console.log('id', id)
+    confirmPopup.open()
+    confirmPopup.changeSubmitHandler(() => {
+      api.deleteCard(id)
+        .then(res => {
+       card.deleteCard()
+        confirmPopup.close()
+
+        console.log(res)
+      })
+    }) 
+  }
+  );
   return card.generateCard();
 }
 
 
 const renderCard = (data) => { 
   const cardElement = createCard(data); 
+  
   section.addItem(cardElement);  
 };  
 
@@ -144,7 +165,10 @@ api.addCard(data['place-name-input'], data['place-link-input'])
   const card = createCard({
     name: res.name,
     link: res.link,
-    likes: res.likes
+    likes: res.likes,
+    id: res._id,
+    userId: userId,
+    ownerId: res.owner._id
   })
   section.addItem(card);
   addCardPopup.close();
@@ -157,11 +181,15 @@ const imagePopup = new PopupWithImage('.popup_type_picture-open');
 const addCardPopup = new PopupWithForm('.popup_type_create-place', placeFormSubmit);
 const editProfilePopup = new PopupWithForm('.popup_type_profile-edit', saveNewProfile);
 const userInfo = new UserInfo({ profileNameSelector: '.profile__name', proileJobSelector: '.profile__profession' })
+const confirmPopup = new PopupWithForm('.popup_type_delete-card');
+  
+
 
 
 imagePopup.setEventListeners()
 addCardPopup.setEventListeners()
 editProfilePopup.setEventListeners()  
+confirmPopup.setEventListeners()
 
 
 section.renderItems()
