@@ -21,7 +21,7 @@
       <main class="content">
         <div class="profile">
           <div class="profile__author">
-            <img class="profile__avatar" src="" alt="фото автора" />
+            <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>"" alt="фото автора" />
             <div class="profile__overlay"></div>
           </div>
           <div class="profile__info">
@@ -152,7 +152,7 @@
         <div class="popup popup_type_delete-card">
           <div class="popup__container">
             <form
-              id="formPlace"
+              id="cardDelete"
               class="popup__form popup__form_type_place-remove"
               name="addPlaceForm"
               novalidate
@@ -177,7 +177,7 @@
         <div class="popup popup_type_change-avatar">
           <div class="popup__container">
             <form
-              id="formPlace"
+              id="avatarChange"
               class="popup__form"
               name="addPlaceForm"
               novalidate
@@ -192,7 +192,7 @@
                 <input
                   class="popup__input popup__input_type_link"
                   name="place-name-input"
-                  id="place-name-input"
+                  id="newAvatarLink"
                   type="url"
                   required
                   placeholder="Ссылка на картинку"
