@@ -14,23 +14,16 @@
         <img
           class="header__logo"
           src="<%=require('./images/Logo-header.svg')%>"
-          
           alt="логотип место"
         />
       </header>
 
-
       <main class="content">
         <div class="profile">
           <div class="profile__author">
-          <img
-            class="profile__avatar"
-            src=""
-            alt="фото автора"
-          />
-          <div class="profile__overlay">
+            <img class="profile__avatar" src="" alt="фото автора" />
+            <div class="profile__overlay"></div>
           </div>
-        </div>
           <div class="profile__info">
             <div class="profile__rename">
               <h1 class="profile__name"></h1>
@@ -53,75 +46,171 @@
 
         <div class="popup popup_type_profile-edit">
           <div class="popup__container">
-            <form id="formProfile" class="popup__form popup__form_profile_edit" name="editAuthorForm" novalidate>
-
-              <button class="popup__button-close popup__button-close_type_profile-edit" aria-label="закрыть" type="button"></button>
+            <form
+              id="formProfile"
+              class="popup__form popup__form_profile_edit"
+              name="editAuthorForm"
+              novalidate
+            >
+              <button
+                class="popup__button-close popup__button-close_type_profile-edit"
+                aria-label="закрыть"
+                type="button"
+              ></button>
 
               <h3 class="popup__title">Редактировать профиль</h3>
 
-                <label class="popup__label">
-                <input class="popup__input popup__input_type_author" id="author-input" name="name" type="text" minlength="2" maxlength="30" required placeholder="Имя" />
+              <label class="popup__label">
+                <input
+                  class="popup__input popup__input_type_author"
+                  id="author-input"
+                  name="name"
+                  type="text"
+                  minlength="2"
+                  maxlength="30"
+                  required
+                  placeholder="Имя"
+                />
                 <span id="author-input-error" class="popup__error"></span>
-                </label>
+              </label>
 
-                <label class="popup__label">
-                <input class="popup__input popup__input_type_profession" name="description" id="profession-input" type="text" minlength="2" maxlength="200" required placeholder="Профессия" />
+              <label class="popup__label">
+                <input
+                  class="popup__input popup__input_type_profession"
+                  name="description"
+                  id="profession-input"
+                  type="text"
+                  minlength="2"
+                  maxlength="200"
+                  required
+                  placeholder="Профессия"
+                />
                 <span id="profession-input-error" class="popup__error"></span>
-                </label>
-              <button class="popup__button-submit popup__button-submit_type_profile" type="submit" id="submit" value="Cохранить">Сохранить</button>
-
+              </label>
+              <button
+                class="popup__button-submit popup__button-submit_type_profile"
+                type="submit"
+                id="submit"
+                value="Cохранить"
+              >
+                Сохранить
+              </button>
             </form>
           </div>
         </div>
 
         <div class="popup popup_type_create-place">
-
           <div class="popup__container">
-
-            <form id="formPlace" class="popup__form popup__form_type_place" name="addPlaceForm" novalidate>
-
-              <button class="popup__button-close popup__button-close_type_create-place" aria-label="закрыть" type="button"></button>
+            <form
+              id="formPlace"
+              class="popup__form popup__form_type_place"
+              name="addPlaceForm"
+              novalidate
+            >
+              <button
+                class="popup__button-close popup__button-close_type_create-place"
+                aria-label="закрыть"
+                type="button"
+              ></button>
               <h3 class="popup__title">Новое место</h3>
               <label class="popup__label">
-                <input class="popup__input popup__input_type_place-name" name="place-name-input" id="place-name-input" type="text" minlength="2" maxlength="30" required placeholder="Название" />
+                <input
+                  class="popup__input popup__input_type_place-name"
+                  name="place-name-input"
+                  id="place-name-input"
+                  type="text"
+                  minlength="2"
+                  maxlength="30"
+                  required
+                  placeholder="Название"
+                />
                 <span class="popup__error" id="place-name-input-error"></span>
               </label>
 
-            <label class="popup__label">
-                <input class="popup__input popup__input_type_place-link" name="place-link-input" id="place-link-input" type="url" required placeholder="Ссылка на картинку" />
+              <label class="popup__label">
+                <input
+                  class="popup__input popup__input_type_place-link"
+                  name="place-link-input"
+                  id="place-link-input"
+                  type="url"
+                  required
+                  placeholder="Ссылка на картинку"
+                />
                 <span class="popup__error" id="place-link-input-error"></span>
-               </label>
-              <button class="popup__button-submit popup__button-submit_type_card" type="submit" value="Создать">Создать</button>
+              </label>
+              <button
+                class="popup__button-submit popup__button-submit_type_card"
+                type="submit"
+                value="Создать"
+              >
+                Создать
+              </button>
             </form>
           </div>
         </div>
 
         <div class="popup popup_type_delete-card">
           <div class="popup__container">
-            <form id="formPlace" class="popup__form popup__form_type_place-remove" name="addPlaceForm" novalidate>
-              <button class="popup__button-close popup__button-close_type_create-place" aria-label="закрыть" type="button"></button>
+            <form
+              id="formPlace"
+              class="popup__form popup__form_type_place-remove"
+              name="addPlaceForm"
+              novalidate
+            >
+              <button
+                class="popup__button-close popup__button-close_type_create-place"
+                aria-label="закрыть"
+                type="button"
+              ></button>
               <h3 class="popup__title popup__title_card-remove">Вы уверены?</h3>
-              <button class="popup__button-accept-remove" type="submit" value="Создать">Да</button>
+              <button
+                class="popup__button-accept-remove"
+                type="submit"
+                value="Создать"
+              >
+                Да
+              </button>
             </form>
           </div>
         </div>
 
         <div class="popup popup_type_change-avatar">
           <div class="popup__container">
-            <form id="formPlace" class="popup__form" name="addPlaceForm" novalidate>
-              <button class="popup__button-close" aria-label="закрыть" type="button"></button>
-              <h3 class="popup__title ">Обновить аватар</h3>
+            <form
+              id="formPlace"
+              class="popup__form"
+              name="addPlaceForm"
+              novalidate
+            >
+              <button
+                class="popup__button-close"
+                aria-label="закрыть"
+                type="button"
+              ></button>
+              <h3 class="popup__title">Обновить аватар</h3>
               <label class="popup__label">
-                <input class="popup__input popup__input_type_link" name="place-name-input" id="place-name-input" type="url" required placeholder="Ссылка на картинку" />
+                <input
+                  class="popup__input popup__input_type_link"
+                  name="place-name-input"
+                  id="place-name-input"
+                  type="url"
+                  required
+                  placeholder="Ссылка на картинку"
+                />
                 <span class="popup__error" id="place-name-input-error"></span>
               </label>
-              <button class="popup__button-submit" type="submit" value="Создать">Сохранить</button>
+              <button
+                class="popup__button-submit"
+                type="submit"
+                value="Создать"
+              >
+                Сохранить
+              </button>
             </form>
           </div>
         </div>
 
         <div class="popup popup_type_picture-open">
-          
           <figure class="popup__figure">
             <button
               class="popup__button-close popup__button-close_type_picture-open"
@@ -146,11 +235,8 @@
             class="card__like-button"
             type="button"
             aria-label="поставить лайк"
-          >
-        </button>
-        <span
-        class="card__like-count"
-      ></span>
+          ></button>
+          <span class="card__like-count"></span>
           <button
             class="card__remove-button"
             type="button"
@@ -158,10 +244,8 @@
           ></button>
         </div>
       </template>
-
-
     </div>
 
-  <script type="module" src="index.js"></script>
-  </body> 
+    <script type="module" src="index.js"></script>
+  </body>
 </html>
