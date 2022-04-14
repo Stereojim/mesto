@@ -73,7 +73,7 @@ const profileSubmitButton = document.querySelector(".popup__button-submit_type_p
 const cardSubmitButton = document.querySelector(".popup__button-submit_type_card");
 const placeFormAdd = document.querySelector(".popup__form_type_place");
 const profileEditForm = profileForm.querySelector(".popup__form_profile_edit");
-const avatarImage = document.querySelector('.profile__avatar');
+const avatarImage = document.querySelector('.profile__overlay');
 
 
 

@@ -11,7 +11,6 @@ object-fit: cover;
 
 .profile__avatar:hover {
 cursor: pointer;
-background-image: url(../../../images/editpen.svg);
 opacity: 0.2;
 background-size: 50%;
 background-repeat: no-repeat;
