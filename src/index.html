@@ -178,7 +178,7 @@
           <div class="popup__container">
             <form
               id="avatarChange"
-              class="popup__form"
+              class="popup__form popup_form_change-avatar"
               name="addPlaceForm"
               novalidate
             >
@@ -188,17 +188,19 @@
                 type="button"
               ></button>
               <h3 class="popup__title">Обновить аватар</h3>
+
               <label class="popup__label">
                 <input
                   class="popup__input popup__input_type_link"
-                  name="place-name-input"
-                  id="newAvatarLink"
+                  name="avatarLink-input"
+                  id="avatarLink-input"
                   type="url"
                   required
                   placeholder="Ссылка на картинку"
                 />
-                <span class="popup__error" id="newAvatarLink-input-error"></span>
+                <span class="popup__error" id="avatarLink-input-error"></span>
               </label>
+              
               <button
                 class="popup__button-submit"
                 type="submit"
@@ -245,7 +247,5 @@
         </div>
       </template>
     </div>
-
-    <script type="module" src="index.js"></script>
   </body>
 </html>

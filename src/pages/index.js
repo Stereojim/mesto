@@ -1,13 +1,16 @@
-import { FormValidator } from "./components/FormValidator.js";
-import { Card } from "./components/Card.js";
-import { Section } from "./components/Section.js";
-import { PopupWithImage } from "./components/PopupWithImage.js";
-import { PopupWithForm } from "./components/PopupWithForm.js";
-import { UserInfo } from "./components/UserInfo.js";
-import "./pages/index.css";
-import { api } from "./components/Api.js";
+import { FormValidator } from "../components/FormValidator.js";
+import { Card } from "../components/Card.js";
+import { Section } from "../components/Section.js";
+import { PopupWithImage } from "../components/PopupWithImage.js";
+import { PopupWithForm } from "../components/PopupWithForm.js";
+import { UserInfo } from "../components/UserInfo.js";
+import "../pages/index.css";
+import { api } from "../components/Api.js";
+import { validationConfig } from "../components/Utils.js";
 
 let userId;
+
+/* Promise.all([getUserInfo(), getCards()]) */
 
 api.getProfile().then((res) => {
   userInfo.setUserInfo(res.name, res.about, res.avatar);
@@ -30,33 +33,6 @@ api.getInitialCards().then((cardList) => {
   });
 });
 
-/* const initialCards = [
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-]; */
-
 const nameInput = document.querySelector(".popup__input_type_author");
 const professionInput = document.querySelector(".popup__input_type_profession");
 const avatarLinkInput = document.querySelector(".popup__input_type_link");
@@ -73,16 +49,7 @@ const cardSubmitButton = document.querySelector(
 const placeFormAdd = document.querySelector(".popup__form_type_place");
 const profileEditForm = profileForm.querySelector(".popup__form_profile_edit");
 const avatarImage = document.querySelector(".profile__overlay");
-
-// конфиг класса валидации
-const validationConfig = {
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__button-submit",
-  inactiveButtonClass: "popup__button-submit_disabled",
-  inputErrorClass: "popup__input_has-error",
-  errorClass: "popup__error_visible",
-};
+const avatarChangeForm = document.querySelector(".popup_form_change-avatar");
 
 // создание класса валидации и запуск
 const addPlaceFormValidation = new FormValidator(
@@ -93,9 +60,14 @@ const profileEditFormValidation = new FormValidator(
   validationConfig,
   profileEditForm
 );
+const avatarChangeValidation = new FormValidator(
+  validationConfig,
+  avatarChangeForm
+);
 
 addPlaceFormValidation.enableValidation();
 profileEditFormValidation.enableValidation();
+avatarChangeValidation.enableValidation();
 
 // создание шаблона карточки
 const createCard = (data) => {
@@ -133,7 +105,6 @@ const createCard = (data) => {
 
 const renderCard = (data) => {
   const cardElement = createCard(data);
-
   section.addItem(cardElement);
 };
 
@@ -144,22 +115,22 @@ profileEditButton.addEventListener("click", () => {
   nameInput.value = name;
   professionInput.value = job;
 
-  profileEditFormValidation.resetValidation(profileForm);
-  profileEditFormValidation.toggleButtonState(profileSubmitButton);
+  profileEditFormValidation.resetValidation();
+  profileEditFormValidation.toggleButtonState();
 
   editProfilePopup.open();
 });
 
 // открытие формы редактирования аватара
 avatarImage.addEventListener("click", () => {
-  /*   const { avatar } = userInfo.getUserInfo()
-  avatarLinkInput.value = avatar */
-
+  avatarChangeValidation.toggleButtonState();
   changeAvatarImage.open();
 });
 
 // сохранение нового аватара
 const saveNewAvatar = () => {
+  /* 
+  popupWithForm._getInputValues(avatar) */
   const avatar = avatarLinkInput.value;
   pageLoading(true);
   api
@@ -176,8 +147,8 @@ const saveNewAvatar = () => {
 
 // открытиe формы создания карточки места
 placeAddButton.addEventListener("click", () => {
-  addPlaceFormValidation.resetValidation(placeForm);
-  addPlaceFormValidation.toggleButtonState(cardSubmitButton);
+  addPlaceFormValidation.resetValidation();
+  addPlaceFormValidation.toggleButtonState();
 
   addCardPopup.open();
 });
@@ -200,10 +171,11 @@ const saveNewProfile = (data) => {
 
 // сохранение новой карточки места
 const placeFormSubmit = (data) => {
-  pageLoading(true);
+  renderLoading(true, cardSubmitButton);
   api
     .addCard(data["place-name-input"], data["place-link-input"])
     .then((res) => {
+     
       console.log("res", res);
       const card = createCard({
         name: res.name,
@@ -218,19 +190,20 @@ const placeFormSubmit = (data) => {
       addCardPopup.close();
     })
     .finally(() => {
-      pageLoading(false);
+      renderLoading(false, cardSubmitButton);
     });
 };
 
 // как это отследить...
-function pageLoading(isLoading) {
+function renderLoading(isLoading, button) {
   if (isLoading) {
-    document.querySelectorAll("popup__button-submit").value = "Сохранение...";
+    button.textContent =
+      "Сохранение...";
   } else {
-    document.querySelectorAll("popup__button-submit").value = "";
+    button.textContent = "";
     console.log("тут мог быть ваш лоадер");
   }
-}
+} 
 
 const section = new Section({ items: [], renderer: renderCard }, ".elements");
 const imagePopup = new PopupWithImage(".popup_type_picture-open");
@@ -253,10 +226,9 @@ const changeAvatarImage = new PopupWithForm(
   saveNewAvatar
 );
 
+
 imagePopup.setEventListeners();
 addCardPopup.setEventListeners();
 editProfilePopup.setEventListeners();
 confirmPopup.setEventListeners();
 changeAvatarImage.setEventListeners();
-
-section.renderItems();
