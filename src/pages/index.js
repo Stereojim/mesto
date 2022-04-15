@@ -112,11 +112,11 @@ const renderCard = (data) => {
 profileEditButton.addEventListener("click", () => {
   const { name, job } = userInfo.getUserInfo();
 
-  nameInput.value = name;
-  professionInput.value = job;
-
   profileEditFormValidation.resetValidation();
   profileEditFormValidation.toggleButtonState();
+
+  nameInput.value = name;
+  professionInput.value = job;
 
   editProfilePopup.open();
 });
@@ -127,12 +127,13 @@ avatarImage.addEventListener("click", () => {
   changeAvatarImage.open();
 });
 
+
 // сохранение нового аватара
 const saveNewAvatar = () => {
   /* 
   popupWithForm._getInputValues(avatar) */
   const avatar = avatarLinkInput.value;
-  pageLoading(true);
+ 
   api
     .editProfileImage(avatar)
     .then((res) => {
@@ -140,22 +141,20 @@ const saveNewAvatar = () => {
       console.log("avatar", avatar);
       changeAvatarImage.close();
     })
-    .finally(() => {
-      pageLoading(false);
-    });
+    .catch(console.log)
 };
 
 // открытиe формы создания карточки места
 placeAddButton.addEventListener("click", () => {
   addPlaceFormValidation.resetValidation();
   addPlaceFormValidation.toggleButtonState();
-
   addCardPopup.open();
 });
 
+
 // сохранение новой формы данных об авторе
 const saveNewProfile = (data) => {
-  pageLoading(true);
+  renderLoading(true, profileSubmitButton)
   const { name, description } = data;
 
   api
@@ -165,9 +164,10 @@ const saveNewProfile = (data) => {
       editProfilePopup.close();
     })
     .finally(() => {
-      pageLoading(false);
+      renderLoading(false, profileSubmitButton)
     });
 };
+
 
 // сохранение новой карточки места
 const placeFormSubmit = (data) => {
@@ -194,16 +194,16 @@ const placeFormSubmit = (data) => {
     });
 };
 
-// как это отследить...
+
+// вероятно это не совсем та функция..
 function renderLoading(isLoading, button) {
   if (isLoading) {
     button.textContent =
       "Сохранение...";
   } else {
-    button.textContent = "";
-    console.log("тут мог быть ваш лоадер");
+    button.textContent = "Сохранить";
   }
-} 
+}  
 
 const section = new Section({ items: [], renderer: renderCard }, ".elements");
 const imagePopup = new PopupWithImage(".popup_type_picture-open");

@@ -4,6 +4,7 @@ export class PopupWithForm extends Popup {
   constructor(popupSelector, handleSubmit) {
     super(popupSelector);
     this._handleSubmit = handleSubmit;
+    this._buttonSubmit = this._popup.querySelector(".popup__button-submit_type_card");
     this._form = this._popup.querySelector(".popup__form");
     this._inputs = this._form.querySelectorAll(".popup__input");
   }
@@ -17,15 +18,17 @@ export class PopupWithForm extends Popup {
     return values;
   }
 
-/* renderLoading(isLoading, buttonText) {
+/* renderLoading(isLoading, buttonSubmit) {
+  buttonSubmit = this._buttonSubmit
   if (isLoading) {
-    buttonText.textContent =
+    this._buttonSubmit.textContent =
       "Сохранение...";
   } else {
-    buttonText.textContent = "Сохранить";
+    this._buttonSubmit.textContent = "Сохранить";
     console.log("тут мог быть ваш лоадер");
   }
-} */
+}  */
+
 
   changeSubmitHandler(newSubmitHandler) {
     this._handleSubmit = newSubmitHandler;
