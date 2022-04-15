@@ -63,7 +63,7 @@ const cardSubmitButton = document.querySelector(
 const placeFormAdd = document.querySelector(".popup__form_type_place");
 const profileEditForm = profileForm.querySelector(".popup__form_profile_edit");
 const avatarImage = document.querySelector(".profile__overlay");
-const avatarChangeForm = document.querySelector(".popup_form_change-avatar");
+const avatarChangeForm = document.querySelector(".popup__form_change-avatar");
 
 // создание класса валидации и запуск
 const addPlaceFormValidation = new FormValidator(
