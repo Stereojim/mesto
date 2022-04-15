@@ -10,14 +10,26 @@ import { validationConfig } from "../components/Utils.js";
 
 let userId;
 
-/* Promise.all([getUserInfo(), getCards()]) */
+// не уверен, что оно именно так должно быть...появляется 404
+Promise.all([getUserInfo(), getCards()])
+.then(([userData, cards]) => {
+userInfo.setUserInfo(userData); 
+section.addItem(cards);
+}) 
+.catch(err => {
+  console.log()
+}); 
 
-api.getProfile().then((res) => {
-  userInfo.setUserInfo(res.name, res.about, res.avatar);
-  userId = res._id;
+
+function getUserInfo () {api.getProfile().then((res) => {
+userInfo.setUserInfo(res.name, res.about, res.avatar);
+  userId = res._id; 
   console.log("avatar", res);
-});
+})
+}
 
+
+function getCards () {
 api.getInitialCards().then((cardList) => {
   console.log("cardList", cardList);
   cardList.forEach((data) => {
@@ -29,9 +41,11 @@ api.getInitialCards().then((cardList) => {
       userId: userId,
       ownerId: data.owner._id,
     });
-    section.addItem(card);
+    section.addItem(card); 
   });
-});
+})
+}
+
 
 const nameInput = document.querySelector(".popup__input_type_author");
 const professionInput = document.querySelector(".popup__input_type_profession");
