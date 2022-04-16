@@ -6,7 +6,7 @@ export class Section {
   }
 
   // изначальная отрисовка
-  renderItems() {
+  renderItems(items) {
     this._items.forEach((data) => {
       this._renderer(data);
     });

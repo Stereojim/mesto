@@ -18,17 +18,6 @@ export class PopupWithForm extends Popup {
     return values;
   }
 
-/* renderLoading(isLoading, buttonSubmit) {
-  buttonSubmit = this._buttonSubmit
-  if (isLoading) {
-    this._buttonSubmit.textContent =
-      "Сохранение...";
-  } else {
-    this._buttonSubmit.textContent = "Сохранить";
-    console.log("тут мог быть ваш лоадер");
-  }
-}  */
-
 
   changeSubmitHandler(newSubmitHandler) {
     this._handleSubmit = newSubmitHandler;

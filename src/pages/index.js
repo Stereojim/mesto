@@ -10,42 +10,27 @@ import { validationConfig } from "../components/Utils.js";
 
 let userId;
 
-// не уверен, что оно именно так должно быть...появляется 404
-Promise.all([getUserInfo(), getCards()])
-.then(([userData, cards]) => {
-userInfo.setUserInfo(userData); 
-section.addItem(cards);
-}) 
-.catch(err => {
-  console.log()
-}); 
+// спасибо! сложно, но вроде получше стало
+Promise.all([api.getProfile(), api.getInitialCards()])
+  .then(([res, items]) => {
+    userInfo.setUserInfo(res.name, res.about, res.avatar);
+    userId = res._id;
 
-
-function getUserInfo () {api.getProfile().then((res) => {
-userInfo.setUserInfo(res.name, res.about, res.avatar);
-  userId = res._id; 
-  console.log("avatar", res);
-})
-}
-
-
-function getCards () {
-api.getInitialCards().then((cardList) => {
-  console.log("cardList", cardList);
-  cardList.forEach((data) => {
-    const card = createCard({
-      name: data.name,
-      link: data.link,
-      likes: data.likes,
-      id: data._id,
-      userId: userId,
-      ownerId: data.owner._id,
+    items.forEach((data) => {
+      const card = createCard({
+        name: data.name,
+        link: data.link,
+        likes: data.likes,
+        id: data._id,
+        userId: userId,
+        ownerId: data.owner._id,
+      });
+      section.addItem(card);
     });
-    section.addItem(card); 
+  })
+  .catch(() => {
+    console.log();
   });
-})
-}
-
 
 const nameInput = document.querySelector(".popup__input_type_author");
 const professionInput = document.querySelector(".popup__input_type_profession");
@@ -59,6 +44,9 @@ const profileSubmitButton = document.querySelector(
 );
 const cardSubmitButton = document.querySelector(
   ".popup__button-submit_type_card"
+);
+const avatarSubmitButton = document.querySelector(
+  ".popup__button-submit_type_avatar"
 );
 const placeFormAdd = document.querySelector(".popup__form_type_place");
 const profileEditForm = profileForm.querySelector(".popup__form_profile_edit");
@@ -94,22 +82,31 @@ const createCard = (data) => {
     (id) => {
       confirmPopup.open();
       confirmPopup.changeSubmitHandler(() => {
-        api.deleteCard(id).then((res) => {
-          card.deleteCard();
-          confirmPopup.close();
-        });
+        api
+          .deleteCard(id)
+          .then(() => {
+            card.deleteCard();
+            confirmPopup.close();
+          })
+          .catch(() => {
+            console.log();
+          });
       });
     },
     (id) => {
       if (card.isLiked()) {
         api.deleteLike(id).then((res) => {
           console.log(res);
-          card.setLikes(res.likes);
+          card.setLikes(res.likes).catch((err) => {
+            console.log();
+          });
         });
       } else {
         api.addLike(id).then((res) => {
           console.log(res);
-          card.setLikes(res.likes);
+          card.setLikes(res.likes).catch((err) => {
+            console.log();
+          });
         });
       }
     }
@@ -141,21 +138,31 @@ avatarImage.addEventListener("click", () => {
   changeAvatarImage.open();
 });
 
-
+// не могу достать. значение вижу, но подставить выходит только указав поле
 // сохранение нового аватара
-const saveNewAvatar = () => {
-  /* 
-  popupWithForm._getInputValues(avatar) */
+const saveNewAvatar = (data) => {
+  console.log(data);
+
+  /* const avatar = data.value */
+
   const avatar = avatarLinkInput.value;
- 
+
+  renderLoading(true, avatarSubmitButton);
+
   api
     .editProfileImage(avatar)
     .then((res) => {
       userInfo.setUserInfo(res.name, res.about, res.avatar);
-      console.log("avatar", avatar);
       changeAvatarImage.close();
     })
-    .catch(console.log)
+
+    .catch(() => {
+      console.log();
+    })
+
+    .finally(() => {
+      renderLoading(false, avatarSubmitButton);
+    });
 };
 
 // открытиe формы создания карточки места
@@ -165,10 +172,9 @@ placeAddButton.addEventListener("click", () => {
   addCardPopup.open();
 });
 
-
 // сохранение новой формы данных об авторе
 const saveNewProfile = (data) => {
-  renderLoading(true, profileSubmitButton)
+  renderLoading(true, profileSubmitButton);
   const { name, description } = data;
 
   api
@@ -177,19 +183,23 @@ const saveNewProfile = (data) => {
       userInfo.setUserInfo(name, description, res.avatar);
       editProfilePopup.close();
     })
+
+    .catch(() => {
+      console.log();
+    })
+
     .finally(() => {
-      renderLoading(false, profileSubmitButton)
+      renderLoading(false, profileSubmitButton);
     });
 };
-
 
 // сохранение новой карточки места
 const placeFormSubmit = (data) => {
   renderLoading(true, cardSubmitButton);
+
   api
     .addCard(data["place-name-input"], data["place-link-input"])
     .then((res) => {
-     
       console.log("res", res);
       const card = createCard({
         name: res.name,
@@ -199,25 +209,26 @@ const placeFormSubmit = (data) => {
         userId: userId,
         ownerId: res.owner._id,
       });
-
       section.addItem(card);
       addCardPopup.close();
     })
+
+    .catch(() => {
+      console.log();
+    })
+
     .finally(() => {
       renderLoading(false, cardSubmitButton);
     });
 };
 
-
-// вероятно это не совсем та функция..
 function renderLoading(isLoading, button) {
   if (isLoading) {
-    button.textContent =
-      "Сохранение...";
+    button.textContent = "Сохранение...";
   } else {
     button.textContent = "Сохранить";
   }
-}  
+}
 
 const section = new Section({ items: [], renderer: renderCard }, ".elements");
 const imagePopup = new PopupWithImage(".popup_type_picture-open");
@@ -239,7 +250,6 @@ const changeAvatarImage = new PopupWithForm(
   ".popup_type_change-avatar",
   saveNewAvatar
 );
-
 
 imagePopup.setEventListeners();
 addCardPopup.setEventListeners();
