@@ -6,9 +6,7 @@ export class Card {
     handleDeleteClick,
     handleLikeClick
   ) {
-    this._cardTemplate = document
-      .querySelector(cardSelector)
-      .content.querySelector(".card");
+    this._cardTemplate = document.querySelector(cardSelector).content.querySelector(".card");
 
     this._title = data.name;
     this._description = data.name;
@@ -88,8 +86,4 @@ export class Card {
   _removeLike() {
     this._likeButton.classList.remove("card__like-button_active");
   }
-
-/*   _handleLikeCard() {
-    this._likeButton.classList.toggle("card__like-button_active");
-  } */
 }
